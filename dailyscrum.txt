@@ -1,0 +1,153 @@
+Daily Scrum Meeting - April 2, 2024
+Participant 1: Lisi
+
+Done:
+Led the team meeting to discuss and decide on the project plan and UI mockups.
+To Do:
+Draft the project proposal.
+Challenges:
+Ensuring the proposal aligns with team and project objectives.
+Need Help:
+Feedback on UI mockups from team members, User case diagrams, E-R diagrams.
+
+Participant 2: Zhi
+
+Done:
+Created user case illustrations.
+To Do:
+Research and discuss front-end framework options (MUI or Ant Design) with Lisi.
+Challenges:
+Deciding on the most suitable front-end framework.
+Need Help:
+Insights from Lisi on framework pros and cons.
+
+Participant 3: Shixin
+
+Done:
+Drafted model E-R diagrams.
+To Do:
+Understand and learn about microservices alongside Ashok.
+Challenges:
+Grasping the concepts of microservices and how they apply to the project.
+Need Help:
+Resources or tutorials on microservices recommended by the team.
+
+Participant 4: Ashok
+
+Done:
+Researched microservice architecture and Jira.
+To Do:
+Further research on microservices and understand their application within the project.
+Challenges:
+Finding the right resources for learning microservices.
+Need Help:
+Recommendations on microservice learning materials from the team.
+
+Daily Scrum Meeting - April 3, 2024
+The entire team met with the mentor to discuss the details of the project plan. All members were in the preparation stage, reading, and discussing the proposal's details, from requirement analysis and technology selection to use case breakdown.
+
+Team-wide Notes:
+
+Done:
+Discussed project details with the mentor.
+To Do:
+Individual study and understanding of the proposal.
+Challenges:
+Clarifying and agreeing on all aspects of the proposal.
+Need Help:
+Further clarification and examples from the mentor on specific proposal segments.
+Daily Scrum Meeting - April 4, 2024
+
+Participant 1: Lisi
+
+Done:
+Continued work on the project proposal.
+To Do:
+Initialize GitHub repositories and set up Jira.
+Challenges:
+Coordinating the team's efforts and integrating various components of the project.
+Need Help:
+Assistance in setting up Jira for project management.
+
+Participant 2: Zhi
+
+Done:
+Discussed front-end frameworks with Lisi.
+To Do:
+Organize the scrum, elaborate on the project details, and set up Trello.
+Challenges:
+Ensuring all team members are on the same page with the project plan.
+Need Help:
+Contributions from all team members in the scrum discussion.
+
+Participant 3: Shixin
+
+Done:
+Studied microservices with Ashok.
+To Do:
+Begin constructing the product service using Spring Boot.
+Challenges:
+Applying theoretical knowledge of microservices to practical application.
+Need Help:
+Guidance from more experienced team members or mentors on Spring Boot.
+
+Participant 4: Ashok
+
+Done:
+Continued microservices research.
+To Do:
+Study Spring Boot microservices base infrastructure and attempt local deployment.
+Challenges:
+Understanding the complex configurations of microservices.
+Need Help:
+Step-by-step guidance on setting up and running microservices.
+
+Daily Scrum Meeting - April 5, 2024
+The team met with the mentor to finalize the Daily Scrum recording method and agreed on the use of a specific branch in the backend repository for this purpose.
+
+Participant 1: Lisi
+
+Done:
+Assisted Ashok with Docker and provided learning resources.
+Completed Swagger external APIs documents.
+To Do:
+Organize system API accounts and keys (Google Map API, Translate API, Stripe API, etc.).
+Challenges:
+Ensuring all external APIs are properly integrated and secured.
+Need Help:
+Information on best practices for API integration and security.
+
+Participant 2: Zhi
+
+Done:
+Completed communication with the mentor.
+Draft meeting recording and breakdown of Project task.
+To Do:
+Start building common front-end components using Ant Design.
+Challenges:
+Designing reusable and efficient components.
+Need Help:
+Feedback on component design from the team and mentor.
+
+Participant 3: Shixin
+
+Done:
+Completed product-service project.
+Presented project learning progress.
+To Do:
+Attempt to emulate the product-service to construct the properties service for the project.
+Challenges:
+Adapting the product-service model to fit the project's specific needs.
+Need Help:
+Examples of similar adaptations from past projects or external resources.
+
+Participant 4: Ashok
+
+Done:
+Raised questions about running microservices projects.
+To Do:
+Continue studying microservice code and configuration, watch educational videos, and clarify the setup process.
+Challenges:
+Navigating through the complexities of microservices setup and deployment.
+Need Help:
+Clarification on specific setup steps or configurations from the team or external resources.
