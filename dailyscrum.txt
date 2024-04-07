@@ -155,6 +155,19 @@ Clarification on specific setup steps or configurations from the team or externa
 
 Daily Scrum Meeting - April 6, 2024
 
+Participant 1: Lisi
+
+Done:
+Create Azure Key Vault
+To Do:
+Figure out Azure Credits unexpected usage.
+
+Challenges:
+Accidenttly created a highly cost service on Azure, and the service costs all student credits.
+
+Need Help:
+Another Account or Cloud platform to host data.
+
 Participant 4: Ashok
 Done:
 Looked in option for GKE.
