@@ -151,3 +151,16 @@ Challenges:
 Navigating through the complexities of microservices setup and deployment.
 Need Help:
 Clarification on specific setup steps or configurations from the team or external resources.
+
+
+Daily Scrum Meeting - April 6, 2024
+
+Participant 4: Ashok
+Done:
+Looked in option for GKE.
+To Do:
+Continue studying microservice code and configuration, watch educational videos, and clarify the setup process.
+Challenges:
+Error and authorization error in Docker deployment.
+Need Help:
+Image build and deployment due to configuration in docker.
