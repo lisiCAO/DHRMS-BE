@@ -36,7 +36,6 @@ Desktop.ini
 # Spring Boot specific
 *.log
 *.sql
-*.xml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -70,10 +69,8 @@ target/
 *.rar
 
 # Docker specific
-docker-compose.override.yml
 *.env
 .env
-docker-compose*.yml
 
 # Node - if you're using it
 node_modules/
