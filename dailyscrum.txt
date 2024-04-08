@@ -168,6 +168,18 @@ Accidenttly created a highly cost service on Azure, and the service costs all st
 Need Help:
 Another Account or Cloud platform to host data.
 
+Participant 2: Zhi
+
+Done:
+Completed design of layout and dashboard.
+To Do:
+Start building layout and dashboard.
+Applying google api in react.
+Challenges:
+Designing reusable and efficient components.
+Need Help:
+Feedback on component design from the team and mentor.
+
 Participant 4: Ashok
 Done:
 Looked in option for GKE.
@@ -177,3 +189,20 @@ Challenges:
 Error and authorization error in Docker deployment.
 Need Help:
 Image build and deployment due to configuration in docker.
+
+
+Daily Scrum Meeting - April 7, 2024
+
+Participant 2: Zhi
+
+Done:
+Finish the layout coding.
+Completed desing of login and regester page.
+To Do:
+Start building dashboard.
+Applying google api in react.
+Challenges:
+Designing reusable and efficient components.
+Need Help:
+Feedback on component design from the team and mentor.
+
