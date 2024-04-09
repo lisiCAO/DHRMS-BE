@@ -251,3 +251,13 @@ convert docker-compose to k8s
 
 Need Help:
 check whether images working well
+
+Participant 4: Ashok
+Done:
+Work on docker and study jenkins research.
+To Do:
+Research on the , jenkins , Spring micro service and kompose and look into backend .
+Challenges:
+Configuration and installation CLI necessary and different errors and compose.
+Need Help:
+deply the kubernetes .
