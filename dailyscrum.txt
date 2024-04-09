@@ -228,3 +228,12 @@ Applying theoretical knowledge of microservices to practical application.
 Need Help:
 Guidance from more experienced team members or mentors on Spring Boot.
 
+Participant 4: Ashok
+Done:
+Studing the microservices for docker.
+To Do:
+Research on the Spring micro service and kompose .
+Challenges:
+Configuration and installation CLI necessary and different errors.
+Need Help:
+To make docker deploy kubernetes.
