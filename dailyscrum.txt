@@ -180,6 +180,17 @@ Designing reusable and efficient components.
 Need Help:
 Feedback on component design from the team and mentor.
 
+Participant 3: Shixin
+
+Done:
+Studied microservices using spring boot follow tutorial.
+To Do:
+Begin constructing the product service using Spring Boot and configure mongoDB in docker.
+Challenges:
+Applying theoretical knowledge of microservices to practical application.
+Need Help:
+Guidance from more experienced team members or mentors on Spring Boot.
+
 Participant 4: Ashok
 Done:
 Looked in option for GKE.
@@ -205,4 +216,15 @@ Challenges:
 Designing reusable and efficient components.
 Need Help:
 Feedback on component design from the team and mentor.
+
+Participant 3: Shixin
+
+Done:
+Studied microservices follow tutorial and video course.
+To Do:
+Begin constructing the order service and inventory service using Spring Boot.
+Challenges:
+Applying theoretical knowledge of microservices to practical application.
+Need Help:
+Guidance from more experienced team members or mentors on Spring Boot.
 
