@@ -237,3 +237,17 @@ Challenges:
 Configuration and installation CLI necessary and different errors.
 Need Help:
 To make docker deploy kubernetes.
+
+Daily Scrum Meeting - April 8, 2024
+Done:
+Google Cloud Storage APi
+To Do:
+Take over k8s hosting
+transfer from azure to google cloud
+File-service
+Google Map Api configuration
+Challenges:
+convert docker-compose to k8s
+
+Need Help:
+check whether images working well
