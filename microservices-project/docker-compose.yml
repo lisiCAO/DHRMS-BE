@@ -20,7 +20,7 @@ services:
     ports:
       - "5431:5431"
     command: -p 5431
-    restart: unless-stopped
+    restart: always
     networks:
       - microservices-network
 
@@ -36,7 +36,7 @@ services:
       - ./postgres-inventory:/data/postgres
     ports:
       - "5432:5432"
-    restart: unless-stopped
+    restart: always
     networks:
       - microservices-network
 
@@ -129,7 +129,7 @@ services:
     platform: linux/arm64
     image: lisicao/discovery-server:latest
     container_name: discovery-server
-    pull_policy: always
+    
     ports:
       - "8761:8761"
     environment:
@@ -143,7 +143,7 @@ services:
     platform: linux/arm64
     image: lisicao/api-gateway:latest
     container_name: api-gateway
-    pull_policy: always
+    
     ports:
       - "8181:8080"
     expose:
@@ -162,7 +162,7 @@ services:
     platform: linux/arm64
     container_name: product-service
     image: lisicao/product-service:latest
-    pull_policy: always
+    
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/product-service
@@ -177,7 +177,7 @@ services:
     platform: linux/arm64
     container_name: order-service
     image: lisicao/order-service:latest
-    pull_policy: always
+    
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
@@ -194,7 +194,7 @@ services:
     platform: linux/arm64
     container_name: inventory-service
     image: lisicao/inventory-service:latest
-    pull_policy: always
+    
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
@@ -209,7 +209,7 @@ services:
     platform: linux/arm64
     container_name: search-service
     image: lisicao/search-service:latest
-    pull_policy: always
+    
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - OPENAI_API_KEY=test
@@ -225,7 +225,7 @@ services:
     platform: linux/arm64
     container_name: notification-service
     image: lisicao/notification-service:latest
-    pull_policy: always
+    
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
@@ -255,7 +255,7 @@ services:
   grafana:
     image: grafana/grafana-arm64v8-linux
     container_name: grafana
-    restart: unless-stopped
+    restart: always
     ports:
       - "3000:3000"
     links:
@@ -283,7 +283,7 @@ services:
   kibana:
     image: kibana:8.12.2
     container_name: kibana
-    restart: unless-stopped
+    restart: always
     ports:
       - "5601:5601"
     environment:
