@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o ./k8s/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: postgres-inventory
+  name: postgres-inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres-inventory
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o ./k8s/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: postgres-inventory
+    spec:
+      containers:
+        - env:
+            - name: PGDATA
+              value: /data/postgres
+            - name: POSTGRES_DB
+              value: inventory-service
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: lisi
+          image: postgres
+          name: postgres-inventory
+          ports:
+            - containerPort: 5432
+              hostPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/postgres
+              name: postgres-inventory-claim0
+      restartPolicy: Always
+      volumes:
+        - name: postgres-inventory-claim0
+          persistentVolumeClaim:
+            claimName: postgres-inventory-claim0
