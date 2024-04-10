@@ -1,20 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
   labels:
-    app: keycloak-mysql
+    io.kompose.service: keycloak-mysql
   name: keycloak-mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keycloak-mysql
+      io.kompose.service: keycloak-mysql
   strategy:
     type: Recreate
   template:
     metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
       labels:
-        app: keycloak-mysql
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: keycloak-mysql
     spec:
       containers:
         - env:
@@ -26,9 +33,8 @@ spec:
               value: root
             - name: MYSQL_USER
               value: keycloak
-          image: mysql:5.7
+          image: mysql:8.3
           name: keycloak-mysql
-          resources: {}
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: keycloak-mysql-claim0
@@ -37,19 +43,3 @@ spec:
         - name: keycloak-mysql-claim0
           persistentVolumeClaim:
             claimName: keycloak-mysql-claim0
-status: {}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    app: keycloak-mysql-claim0
-  name: keycloak-mysql-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
