@@ -239,6 +239,9 @@ Need Help:
 To make docker deploy kubernetes.
 
 Daily Scrum Meeting - April 8, 2024
+
+Participant 1: Lisi
+
 Done:
 Google Cloud Storage APi
 To Do:
@@ -261,3 +264,17 @@ Challenges:
 Configuration and installation CLI necessary and different errors and compose.
 Need Help:
 deply the kubernetes .
+
+
+Daily Scrum Meeting - April 9, 2024
+
+Participant 1: Lisi
+
+Done:
+convert docker-compose file to k8s
+To Do:
+make sure k8s run without error
+
+Challenges:
+less time in coding.
+
