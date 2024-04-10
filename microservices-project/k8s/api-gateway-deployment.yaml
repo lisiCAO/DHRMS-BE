@@ -1,48 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
   labels:
-    app: api-gateway
+    io.kompose.service: api-gateway
   name: api-gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-gateway
-  strategy: {}
+      io.kompose.service: api-gateway
   template:
     metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
       labels:
-        app: api-gateway
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: api-gateway
     spec:
       containers:
         - env:
             - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY
-              value: ' TRACE'
+              value: TRACE
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/api-gateway:latest
           name: api-gateway
           ports:
             - containerPort: 8080
+              hostPort: 8181
+              protocol: TCP
             - containerPort: 8181
-          resources: {}
+              protocol: TCP
       restartPolicy: Always
-status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: api-gateway
-  name: api-gateway
-spec:
-  type: LoadBalancer
-  ports:
-    - name: "8181"
-      port: 8181
-      targetPort: 8080
-  selector:
-    app: api-gateway
-status:
-  loadBalancer: {}

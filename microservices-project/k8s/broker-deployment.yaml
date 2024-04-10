@@ -1,20 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
   labels:
-    app: broker
+    io.kompose.service: broker
   name: broker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: broker
-  strategy: {}
+      io.kompose.service: broker
   template:
     metadata:
-
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
       labels:
-        app: broker
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: broker
     spec:
       containers:
         - env:
@@ -32,30 +37,10 @@ spec:
               value: "1"
             - name: KAFKA_ZOOKEEPER_CONNECT
               value: zookeeper:2181
-          image: confluentinc/cp-kafka:7.0.1
+          image: confluentinc/cp-kafka:latest-ubi8.arm64
           name: broker
           ports:
             - containerPort: 9092
-          resources: {}
+              hostPort: 9092
+              protocol: TCP
       restartPolicy: Always
-status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  annotations:
-    kompose.cmd: F:\tools\kompose.exe convert
-    kompose.version: 1.26.1 (a9d05d509)
-  creationTimestamp: null
-  labels:
-    app: broker
-  name: broker
-spec:
-  ports:
-    - name: "9092"
-      port: 9092
-      targetPort: 9092
-  selector:
-    app: broker
-status:
-  loadBalancer: {}

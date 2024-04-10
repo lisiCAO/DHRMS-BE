@@ -1,18 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
   labels:
-    app: postgres-inventory
+    io.kompose.service: postgres-inventory
   name: postgres-inventory
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-inventory
+      io.kompose.service: postgres-inventory
+  strategy:
+    type: Recreate
   template:
     metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
       labels:
-        app: postgres-inventory
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: postgres-inventory
     spec:
       containers:
         - env:
@@ -23,12 +32,11 @@ spec:
             - name: POSTGRES_PASSWORD
               value: password
             - name: POSTGRES_USER
-              value: ptechie
+              value: lisi
           image: postgres
           name: postgres-inventory
           ports:
             - containerPort: 5432
-          resources: {}
           volumeMounts:
             - mountPath: /data/postgres
               name: postgres-inventory-claim0
@@ -37,34 +45,3 @@ spec:
         - name: postgres-inventory-claim0
           persistentVolumeClaim:
             claimName: postgres-inventory-claim0
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: postgres-inventory
-  name: postgres-inventory
-spec:
-  ports:
-    - name: "5432"
-      port: 5432
-      targetPort: 5432
-  selector:
-    app: postgres-inventory
-status:
-  loadBalancer: {}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    app: postgres-inventory-claim0
-  name: postgres-inventory-claim0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}

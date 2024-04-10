@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: notification-service
+  name: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: notification-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: notification-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: lisicao/notification-service:latest
+          name: notification-service
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+spec:
+  ports:
+    - port: 8080  # 服务端口
+      targetPort: 8080  # 容器内的目标端口
+  selector:
+    io.kompose.service: notification-service  # 与 Deployment 选择器匹配

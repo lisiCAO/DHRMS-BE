@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: search-service
+  name: search-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: search-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: search-service
+    spec:
+      containers:
+        - env:
+            - name: OPENAI_API_KEY
+              value: test
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: lisicao/search-service:latest
+          name: search-service
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: search-service

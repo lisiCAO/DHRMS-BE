@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s/
+    kompose.version: 1.32.0 (HEAD)
+  labels:
+    io.kompose.service: inventory-service
+  name: inventory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: inventory-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s/
+        kompose.version: 1.32.0 (HEAD)
+      labels:
+        io.kompose.network/microservices-project-microservices-network: "true"
+        io.kompose.service: inventory-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-inventory:5432/inventory-service
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: lisicao/inventory-service:latest
+          name: inventory-service
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: inventory-service
