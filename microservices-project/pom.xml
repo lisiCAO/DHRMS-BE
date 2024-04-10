@@ -23,6 +23,7 @@
         <module>api-gateway</module>
         <module>notification-service</module>
         <module>search-service</module>
+        <module>property-service</module>
     </modules>
 
     <properties>
