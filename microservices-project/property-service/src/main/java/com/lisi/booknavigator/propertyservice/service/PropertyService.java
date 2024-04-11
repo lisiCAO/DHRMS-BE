@@ -11,10 +11,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -68,5 +69,54 @@ public class PropertyService {
                 .amenities(property.getAmenities())
                 .status(property.getStatus())
                 .build();
+    }
+
+    public PropertyResponse getPropertyById(String propertyId) {
+        Optional<Property> propertyOpt = propertyRepository.findById(propertyId);
+        if (propertyOpt.isPresent()) {
+            Property property = propertyOpt.get();
+            return mapToPropertyResponse(property);
+        } else {
+            return null;
+        }
+    }
+
+    public PropertyResponse updatePropertyById(String propertyId, PropertyRequest propertyRequest) {
+        Optional<Property> propertyOpt = propertyRepository.findById(propertyId);
+        if (propertyOpt.isPresent()) {
+            Property property = propertyOpt.get();
+
+            //update property fields
+            property.setOwnerUserId(propertyRequest.getOwnerUserId());
+            property.setAddress(propertyRequest.getAddress());
+            property.setPostcode(propertyRequest.getPostcode());
+            property.setPropertytype(propertyRequest.getPropertytype());
+            property.setPropertydescription(propertyRequest.getPropertydescription());
+            property.setAmenities(new Amenities(
+                    propertyRequest.getAmenities().getParking(),
+                    propertyRequest.getAmenities().getKitchen(),
+                    propertyRequest.getAmenities().getPool(),
+                    propertyRequest.getAmenities().getBedrooms(),
+                    propertyRequest.getAmenities().getBathrooms(),
+                    propertyRequest.getAmenities().getLivingArea()));
+            property.setStatus(propertyRequest.getStatus());
+
+            // save the updated property
+            Property updatedProperty = propertyRepository.save(property);
+
+            // convert the updated property to response object
+            return mapToPropertyResponse(updatedProperty);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean deletePropertyById(String propertyId) {
+        if (propertyRepository.existsById(propertyId)) {
+            propertyRepository.deleteById(propertyId);
+            return true; // delete operation executed successfully
+        } else {
+            return false; // property not found
+        }
     }
 }
