@@ -33,8 +33,6 @@ spec:
           name: grafana
           ports:
             - containerPort: 3000
-              hostPort: 3000
-              protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-claim0

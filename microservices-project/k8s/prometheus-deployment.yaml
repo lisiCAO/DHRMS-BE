@@ -28,8 +28,6 @@ spec:
           name: prometheus
           ports:
             - containerPort: 9090
-              hostPort: 9090
-              protocol: TCP
           volumeMounts:
             - mountPath: /etc/prometheus
               name: prometheus-claim0

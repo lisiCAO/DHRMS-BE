@@ -46,8 +46,6 @@ spec:
           name: keycloak
           ports:
             - containerPort: 8080
-              hostPort: 8080
-              protocol: TCP
           volumeMounts:
             - mountPath: /opt/keycloak/data/import
               name: keycloak-claim0
