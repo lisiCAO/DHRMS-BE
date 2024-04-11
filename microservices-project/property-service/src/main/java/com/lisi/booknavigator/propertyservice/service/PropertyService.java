@@ -55,6 +55,8 @@ public class PropertyService {
     public List<PropertyResponse> getAllProperties(){
         List<Property> properties = propertyRepository.findAll();
 
+        log.info("Retrieved {} properties", properties.size());
+
         return properties.stream().map(this::mapToPropertyResponse).toList();
     }
 
@@ -75,8 +77,10 @@ public class PropertyService {
         Optional<Property> propertyOpt = propertyRepository.findById(propertyId);
         if (propertyOpt.isPresent()) {
             Property property = propertyOpt.get();
+            log.info("Property {} retrieved", property);
             return mapToPropertyResponse(property);
         } else {
+            log.info("Property ID {} not found.", propertyId);
             return null;
         }
     }
@@ -105,8 +109,10 @@ public class PropertyService {
             Property updatedProperty = propertyRepository.save(property);
 
             // convert the updated property to response object
+            log.info("Property {} updated", property);
             return mapToPropertyResponse(updatedProperty);
         } else {
+            log.info("Property ID {} not found.", propertyId);
             return null;
         }
     }
@@ -114,8 +120,11 @@ public class PropertyService {
     public boolean deletePropertyById(String propertyId) {
         if (propertyRepository.existsById(propertyId)) {
             propertyRepository.deleteById(propertyId);
+            log.info("Property ID {} deleted", propertyId);
             return true; // delete operation executed successfully
         } else {
+            log.info("Property ID {} not found.", propertyId);
+
             return false; // property not found
         }
     }
