@@ -2,7 +2,7 @@ package com.lisi.booknavigator.propertyservice.service;
 
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyResponse;
-import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
+//import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
 import com.lisi.booknavigator.propertyservice.model.Amenities;
 import com.lisi.booknavigator.propertyservice.model.Property;
 import com.lisi.booknavigator.propertyservice.repository.PropertyRepository;
@@ -22,7 +22,7 @@ import java.util.List;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
-    private final KafkaTemplate<String, PropertyEvent> kafkaTemplate;
+    //private final KafkaTemplate<String, PropertyEvent> kafkaTemplate;
 
     public void createProperty(PropertyRequest propertyRequest){
 
@@ -45,8 +45,8 @@ public class PropertyService {
 
         Property savedProperty = propertyRepository.save(property);
 
-        PropertyEvent event = new PropertyEvent(savedProperty.getId(), PropertyEvent.EventType.CREATE, savedProperty);
-        kafkaTemplate.send("propertiesTopic",event);
+        //PropertyEvent event = new PropertyEvent(savedProperty.getId(), PropertyEvent.EventType.CREATE, savedProperty);
+        //kafkaTemplate.send("propertiesTopic",event);
 
         log.info("Property {} is saved", property.getId());
     }
