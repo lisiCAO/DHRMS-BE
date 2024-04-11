@@ -278,3 +278,9 @@ make sure k8s run without error
 Challenges:
 less time in coding.
 
+Participant 4: Ashok
+Done:
+Research in Backend.
+Challenges:
+Docker VM couldn't handle all containers running.
+
