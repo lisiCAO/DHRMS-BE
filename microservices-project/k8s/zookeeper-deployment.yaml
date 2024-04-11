@@ -31,6 +31,4 @@ spec:
           name: zookeeper
           ports:
             - containerPort: 2181
-              hostPort: 2181
-              protocol: TCP
       restartPolicy: Always

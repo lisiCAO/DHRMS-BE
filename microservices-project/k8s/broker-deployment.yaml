@@ -41,6 +41,4 @@ spec:
           name: broker
           ports:
             - containerPort: 9092
-              hostPort: 9092
-              protocol: TCP
       restartPolicy: Always

@@ -31,8 +31,4 @@ spec:
           name: api-gateway
           ports:
             - containerPort: 8080
-              hostPort: 8181
-              protocol: TCP
-            - containerPort: 8181
-              protocol: TCP
       restartPolicy: Always

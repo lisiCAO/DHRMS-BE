@@ -31,6 +31,4 @@ spec:
           name: elasticsearch
           ports:
             - containerPort: 9200
-              hostPort: 9200
-              protocol: TCP
       restartPolicy: Always

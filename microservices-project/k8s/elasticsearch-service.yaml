@@ -14,4 +14,3 @@ spec:
       targetPort: 9200
   selector:
     io.kompose.service: elasticsearch
-  type: LoadBalancer

@@ -26,6 +26,4 @@ spec:
           name: zipkin
           ports:
             - containerPort: 9411
-              hostPort: 9411
-              protocol: TCP
       restartPolicy: Always
