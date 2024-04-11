@@ -81,7 +81,6 @@ Need Help:
 Contributions from all team members in the scrum discussion.
 
 Participant 3: Shixin
-
 Done:
 Studied microservices with Ashok.
 To Do:
@@ -130,7 +129,6 @@ Need Help:
 Feedback on component design from the team and mentor.
 
 Participant 3: Shixin
-
 Done:
 Completed product-service project.
 Presented project learning progress.
@@ -181,7 +179,6 @@ Need Help:
 Feedback on component design from the team and mentor.
 
 Participant 3: Shixin
-
 Done:
 Studied microservices using spring boot follow tutorial.
 To Do:
@@ -218,9 +215,8 @@ Need Help:
 Feedback on component design from the team and mentor.
 
 Participant 3: Shixin
-
 Done:
-Studied microservices follow tutorial and video course.
+Studied microservices follow tutorial and video course. Finish the product-service.
 To Do:
 Begin constructing the order service and inventory service using Spring Boot.
 Challenges:
@@ -255,11 +251,20 @@ convert docker-compose to k8s
 Need Help:
 check whether images working well
 
+Participant 3: Shixin
+Done:
+Finsih the order-serivce and inventory-service.
+Follow the tutorial to implement discovery-server to register other service, and api-gateway to routes all other services.
+To Do:
+Update property and user data model in SwaggerHub.
+
+
 Participant 4: Ashok
 Done:
 Work on docker and study jenkins research.
 To Do:
 Research on the , jenkins , Spring micro service and kompose and look into backend .
+Create the property-service in Backend project. 
 Challenges:
 Configuration and installation CLI necessary and different errors and compose.
 Need Help:
@@ -278,9 +283,28 @@ make sure k8s run without error
 Challenges:
 less time in coding.
 
+Participant 3: Shixin
+Done:
+Update property and user data model in SwaggerHub
+To Do:
+Prepare the development environment of multiple docker in my owner laptop.
+Challenges:
+Follow OpenAPI 3.0.0 syntax to define property and user schema.
+
+
 Participant 4: Ashok
 Done:
 Research in Backend.
 Challenges:
 Docker VM couldn't handle all containers running.
+
+Daily Scrum Meeting - April 10, 2024
+Done:
+Deploy the multiple docker development environment in my Mac laptop. Make sure all the containers run succeed.
+Create a new property-service branch in GitHub.
+Create the property-service in the backend project.
+To Do:
+Implement all the defined api of property-service in SwaggerHub.
+
+
 
