@@ -251,6 +251,20 @@ convert docker-compose to k8s
 Need Help:
 check whether images working well
 
+Participant 2: Zhi
+
+Done:
+Finish the layout coding.
+Finish login and regester pages.
+Applying google api in react
+To Do:
+Start building dashboard.
+Applying google api in react.
+Challenges:
+Bug on google map api
+Need Help:
+Camera fixed on google map
+
 Participant 3: Shixin
 Done:
 Finsih the order-serivce and inventory-service.
@@ -283,6 +297,19 @@ make sure k8s run without error
 Challenges:
 less time in coding.
 
+Participant 2: Zhi
+
+Done:
+Finish the layout coding.
+Finish login and regester pages.
+Applying google api in react
+To Do:
+Start working on property list
+Challenges:
+Using step form to create property
+Need Help:
+Camera fixed on google map
+
 Participant 3: Shixin
 Done:
 Update property and user data model in SwaggerHub
@@ -306,5 +333,33 @@ Create the property-service in the backend project.
 To Do:
 Implement all the defined api of property-service in SwaggerHub.
 
+Participant 2: Zhi
+
+Done:
+Finish the layout coding.
+Finish login and regester pages.
+Applying google api in react
+To Do:
+Start working on property list
+Coding on user profile
+Challenges:
+Implement multi languages to website
+Need Help:
+Camera fixed on google map
+
+
+Daily Scrum Meeting - April 11, 2024
+
+Participant 2: Zhi
+
+Done:
+Complete property list nad property create pag
+Complete user profile
+To Do:
+Prepare for the first sprint
+Challenges:
+Too many bugs to fix
+Need Help:
+Camera fixed on google map
 
 
