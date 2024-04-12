@@ -350,6 +350,17 @@ Camera fixed on google map
 
 Daily Scrum Meeting - April 11, 2024
 
+Participant 1: Lisi
+
+Done:
+deploy infrastructure, one service and mongo db to google cloud k8s
+To Do:
+adjust api-gateway to route to keycloak for authentication
+reorganise microservice by making use of google cloud self-managed service, like, replacing eureka with k8s service routes, prometheuse and so on.
+
+Challenges:
+complexity.
+
 Participant 2: Zhi
 
 Done:
