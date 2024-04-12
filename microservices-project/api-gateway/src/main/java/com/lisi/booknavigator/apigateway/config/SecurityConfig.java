@@ -13,12 +13,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
+
         serverHttpSecurity.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/eureka/**").permitAll() // allow Eureka call without condition
-                        .anyExchange().authenticated()) // all others should be authenticated
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())); // use Default explicitly 6.1
-
+                        .anyExchange().permitAll());  // 允许所有请求 Test only
+//                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));  // use Default explicitly 6.1
+            /*
+                .pathMatchers("/eureka/**").permitAll() // allow Eureka call without condition
+                .anyExchange().authenticated()) // all others should be authenticated
+                 */
         return serverHttpSecurity.build();
     }
 }
