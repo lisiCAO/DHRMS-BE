@@ -50,3 +50,5 @@ microservices-project/elasticsearch-data/
 /grafana/
 /elasticsearch-data/
 
+/postgres-dhrms/
+/postgres-data/

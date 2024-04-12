@@ -3,6 +3,7 @@ package com.lisi.booknavigator.propertyservice.service;
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyResponse;
 //import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
+import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
 import com.lisi.booknavigator.propertyservice.model.Amenities;
 import com.lisi.booknavigator.propertyservice.model.Property;
 import com.lisi.booknavigator.propertyservice.repository.PropertyRepository;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 //import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.Optional;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
-    //private final KafkaTemplate<String, PropertyEvent> kafkaTemplate;
+    private final KafkaTemplate<String, PropertyEvent> kafkaTemplate;
 
     public void createProperty(PropertyRequest propertyRequest){
 
@@ -46,8 +48,8 @@ public class PropertyService {
 
         Property savedProperty = propertyRepository.save(property);
 
-        //PropertyEvent event = new PropertyEvent(savedProperty.getId(), PropertyEvent.EventType.CREATE, savedProperty);
-        //kafkaTemplate.send("propertiesTopic",event);
+        PropertyEvent event = new PropertyEvent(savedProperty.getId(), PropertyEvent.EventType.CREATE, savedProperty);
+        kafkaTemplate.send("propertiesTopic",event);
 
         log.info("Property {} is saved", property.getId());
     }
