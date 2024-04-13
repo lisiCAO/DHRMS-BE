@@ -24,7 +24,7 @@ spec:
       containers:
         - env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-order:5431/order-service
+              value: jdbc:postgresql://postgres-dhrms:5432/order-service
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/order-service:latest
@@ -39,7 +39,7 @@ metadata:
   name: order-service
 spec:
   ports:
-    - port: 8080  # 服务端口
-      targetPort: 8080  # 容器内的目标端口
+    - port: 8080
+      targetPort: 8080
   selector:
-    io.kompose.service: order-service  # 与 Deployment 选择器匹配
+    io.kompose.service: order-service
