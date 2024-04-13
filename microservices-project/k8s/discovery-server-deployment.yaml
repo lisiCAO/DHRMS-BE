@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: discovery-server
+  strategy: {}
   template:
     metadata:
       annotations:
@@ -29,4 +30,13 @@ spec:
           name: discovery-server
           ports:
             - containerPort: 8761
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+
       restartPolicy: Always
+status: {}
