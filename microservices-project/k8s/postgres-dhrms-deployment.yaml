@@ -40,8 +40,13 @@ spec:
           volumeMounts:
             - mountPath: /data/postgres
               name: postgres-dhrms-claim0
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
       restartPolicy: Always
       volumes:
         - name: postgres-dhrms-claim0
           persistentVolumeClaim:
             claimName: postgres-dhrms-claim0
+        - name: init-script
+          configMap:
+            name: postgres-init
