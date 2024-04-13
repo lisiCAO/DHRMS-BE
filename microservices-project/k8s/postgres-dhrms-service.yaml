@@ -5,12 +5,12 @@ metadata:
     kompose.cmd: kompose convert -o k8s/
     kompose.version: 1.32.0 (HEAD)
   labels:
-    io.kompose.service: grafana
-  name: grafana
+    io.kompose.service: postgres-dhrms
+  name: postgres-dhrms
 spec:
   ports:
-    - name: "3000"
-      port: 3000
-      targetPort: 3000
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
   selector:
-    io.kompose.service: grafana
+    io.kompose.service: postgres-dhrms
