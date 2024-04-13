@@ -27,8 +27,13 @@ spec:
               value: docker
           image: lisicao/notification-service:latest
           name: notification-service
-          ports:
-            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "250m"
+              memory: "512Mi"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -37,7 +42,10 @@ metadata:
   name: notification-service
 spec:
   ports:
-    - port: 8080  # 服务端口
-      targetPort: 8080  # 容器内的目标端口
+    - name: "80"
+      port: 80
+      targetPort: 9192
   selector:
     io.kompose.service: notification-service  # 与 Deployment 选择器匹配
+status:
+  loadBalancer: {}

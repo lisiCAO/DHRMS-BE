@@ -14,3 +14,5 @@ spec:
       targetPort: 9092
   selector:
     io.kompose.service: broker
+status:
+  loadBalancer: {}
