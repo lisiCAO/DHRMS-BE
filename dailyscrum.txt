@@ -373,4 +373,23 @@ Too many bugs to fix
 Need Help:
 Camera fixed on google map
 
+Daily Scrum Meeting - April 13, 2024
 
+Participant 1: Lisi
+
+Done:
+  adjust k8s & docker strucutre - delete prometheuse, grafana; combine postgres; add property service
+  add api-gateway routes and authentication
+  integrate property service into micro-service
+  communicate with Shixin regards the workflow of elasticsearch and search-service
+
+To Do:
+  fix bugs of communication in google cloud k8s
+    - test discover-server 
+    - import init files into k8s
+    - maybe replace discover-server with k8s self managed server communication
+  complete file-service
+  reassign tasks in the backend
+  
+Challenges:
+  make sure teammates to understand and complete tasks in time
