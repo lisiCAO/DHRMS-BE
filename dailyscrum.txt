@@ -347,6 +347,12 @@ Implement multi languages to website
 Need Help:
 Camera fixed on google map
 
+Participant 3: Shixin
+Done:
+Configure and run the multiple docker development environment in my owner Mac laptop.
+To Do:
+Add the property service to the backend project.
+
 
 Daily Scrum Meeting - April 11, 2024
 
@@ -372,6 +378,21 @@ Challenges:
 Too many bugs to fix
 Need Help:
 Camera fixed on google map
+
+Participant 3: Shixin
+Done:
+Configure and run the multiple docker development environment in my owner Mac laptop.
+To Do:
+Add the property service to the backend project.
+
+Daily Scrum Meeting - April 12, 2024
+
+Participant 3: Shixin
+Done:
+Add the property service to the backend project.
+To Do:
+Add the search service to the backend project. Update local docker development environment to include property service and search service.
+
 
 Daily Scrum Meeting - April 13, 2024
 
