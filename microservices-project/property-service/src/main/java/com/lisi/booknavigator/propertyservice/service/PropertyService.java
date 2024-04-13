@@ -2,7 +2,6 @@ package com.lisi.booknavigator.propertyservice.service;
 
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyResponse;
-//import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
 import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
 import com.lisi.booknavigator.propertyservice.model.Amenities;
 import com.lisi.booknavigator.propertyservice.model.Property;
@@ -11,8 +10,6 @@ import com.lisi.booknavigator.propertyservice.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
-//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
