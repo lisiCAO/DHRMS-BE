@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+data:
+  init.sql: |
+    -- Your SQL commands go here
+    CREATE DATABASE "order-service";
+    CREATE DATABASE "inventory-service";
+    -- Others
