@@ -24,6 +24,7 @@
         <module>notification-service</module>
         <module>search-service</module>
         <module>property-service</module>
+        <module>file-service</module>
     </modules>
 
     <properties>
@@ -32,6 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
         <spring-boot.version>3.2.2</spring-boot.version>
+        <spring-cloud-gcp.version>5.1.0</spring-cloud-gcp.version>
         <spring-ai.version>0.8.0</spring-ai.version>
     </properties>
 
@@ -69,6 +71,13 @@
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${spring-cloud-gcp.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
