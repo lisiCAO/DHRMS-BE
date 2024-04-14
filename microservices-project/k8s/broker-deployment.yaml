@@ -37,8 +37,16 @@ spec:
               value: "1"
             - name: KAFKA_ZOOKEEPER_CONNECT
               value: zookeeper:2181
-          image: confluentinc/cp-kafka:latest-ubi8.arm64
+          image: confluentinc/cp-kafka:latest
           name: broker
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
           ports:
             - containerPort: 9092
       restartPolicy: Always
+status: {}

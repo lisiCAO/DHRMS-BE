@@ -28,7 +28,17 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/api-gateway:latest
+          imagePullPolicy: Always
           name: api-gateway
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
           ports:
             - containerPort: 8080
+            - containerPort: 8181
       restartPolicy: Always
+status: {}

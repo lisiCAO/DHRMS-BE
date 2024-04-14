@@ -24,29 +24,26 @@ spec:
         io.kompose.service: postgres-dhrms
     spec:
       containers:
-        - env:
-            - name: PGDATA
-              value: /data/postgres
-            - name: POSTGRES_DB
-              value: dhrms-service
-            - name: POSTGRES_PASSWORD
-              value: password
+        - name: postgres-dhrms
+          image: postgres:latest
+          env:
             - name: POSTGRES_USER
               value: lisi
-          image: postgres
-          name: postgres-dhrms
+            - name: POSTGRES_PASSWORD
+              value: password
           ports:
             - containerPort: 5432
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
           volumeMounts:
-            - mountPath: /data/postgres
-              name: postgres-dhrms-claim0
-            - name: init-script
+            - name: init-db-script
               mountPath: /docker-entrypoint-initdb.d
-      restartPolicy: Always
       volumes:
-        - name: postgres-dhrms-claim0
-          persistentVolumeClaim:
-            claimName: postgres-dhrms-claim0
-        - name: init-script
+        - name: init-db-script
           configMap:
             name: postgres-init
