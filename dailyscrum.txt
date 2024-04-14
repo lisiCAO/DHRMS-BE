@@ -354,6 +354,13 @@ To Do:
 Add the property service to the backend project.
 
 
+Participant 4: Ashok
+Done:
+Started to work on Lease Backend
+To Do:
+Understanding the workflow for the project.
+
+
 Daily Scrum Meeting - April 11, 2024
 
 Participant 1: Lisi
@@ -385,6 +392,12 @@ Configure and run the multiple docker development environment in my owner Mac la
 To Do:
 Add the property service to the backend project.
 
+Participant 4: Ashok
+Done:
+Started to work on Lease Histories
+To Do:
+Fix the bugs for the Lease-service.
+
 Daily Scrum Meeting - April 12, 2024
 
 Participant 3: Shixin
@@ -414,3 +427,5 @@ To Do:
   
 Challenges:
   make sure teammates to understand and complete tasks in time
+
+
