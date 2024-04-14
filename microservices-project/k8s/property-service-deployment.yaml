@@ -25,14 +25,17 @@ spec:
         - env:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongo:27017/property-service
           image: lisicao/property-service:latest
+          imagePullPolicy: Always
           name: property-service
           resources:
             requests:
               cpu: "100m"
               memory: "256Mi"
             limits:
-              cpu: "250m"
+              cpu: "200m"
               memory: "512Mi"
       restartPolicy: Always
 ---
@@ -44,7 +47,7 @@ spec:
   ports:
     - name: "80"
       port: 80
-      targetPort: 9194
+      targetPort: 8080
   selector:
     io.kompose.service: property-service
 status:

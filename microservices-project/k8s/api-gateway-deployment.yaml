@@ -28,6 +28,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/api-gateway:latest
+          imagePullPolicy: Always
           name: api-gateway
           resources:
             requests:
