@@ -1,2 +1,4 @@
-package com.lisi.booknavigator.fileservice;public class FileServiceApplication {
+package com.lisi.booknavigator.fileservice;
+
+public class FileServiceApplication {
 }
