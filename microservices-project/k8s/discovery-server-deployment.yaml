@@ -27,6 +27,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/discovery-server:latest
+          imagePullPolicy: Always
           name: discovery-server
           ports:
             - containerPort: 8761
