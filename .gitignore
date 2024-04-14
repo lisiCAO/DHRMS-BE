@@ -35,7 +35,6 @@ Desktop.ini
 
 # Spring Boot specific
 *.log
-*.sql
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
