@@ -25,8 +25,7 @@ jobs:
         cache: maven
 
     - name: Maven clean and compile
-      run: mvn compile jib:build -Djib.from.auth.username=${{ secrets.REGISTRY_USERNAME }} -Djib.from.auth.password=${{ secrets.REGISTRY_PASSWORD }} -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKERHUB_PASSWORD }}
-      working-directory: ./microservices-project
+      run: mvn compile jib:build -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build and push Docker image with Jib
       run: mvn compile jib:build
