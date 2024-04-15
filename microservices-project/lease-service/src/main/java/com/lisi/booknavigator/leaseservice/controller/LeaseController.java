@@ -51,7 +51,7 @@ public class LeaseController {
     }
 
     @GetMapping("/{leaseId}")
-    public ResponseEntity<Object> getLeaseById(@PathVariable String leaseId) {
+    public ResponseEntity<Object> getLeaseById(@PathVariable Long leaseId) {
         try {
             LeaseResponse lease = leaseService.getLeaseById(leaseId);
             if (lease != null) {
@@ -68,7 +68,7 @@ public class LeaseController {
     }
 
     @PutMapping("/{leaseId}")
-    public ResponseEntity<Object> updateLeaseById(@PathVariable String leaseId, @RequestBody LeaseRequest leaseRequest) {
+    public ResponseEntity<Object> updateLeaseById(@PathVariable Long leaseId, @RequestBody LeaseRequest leaseRequest) {
         try {
             LeaseResponse updatedLease = leaseService.updateLeaseById(leaseId, leaseRequest);
             if (updatedLease != null) {
@@ -85,7 +85,7 @@ public class LeaseController {
     }
 
     @DeleteMapping("/{leaseId}")
-    public ResponseEntity<Object> deleteLease(@PathVariable String leaseId) {
+    public ResponseEntity<Object> deleteLease(@PathVariable Long leaseId) {
         try{
             boolean isDeleted = leaseService.deleteLeaseById(leaseId);
             if (isDeleted) {

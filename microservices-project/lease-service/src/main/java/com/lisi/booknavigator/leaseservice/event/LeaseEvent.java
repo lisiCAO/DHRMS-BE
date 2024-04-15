@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 public class LeaseEvent {
-    private Long Id;
+    private Long leaseId;
     private EventType eventType;
     private Lease lease;
 

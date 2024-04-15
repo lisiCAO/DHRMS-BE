@@ -8,10 +8,10 @@ import com.lisi.booknavigator.leaseservice.service.LeaseService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
-import com.lisi.booknavigator.leaseservice.model.LeaseType;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
+import java.util.Locale;
 
 @SpringBootApplication
 @Slf4j
@@ -23,7 +23,7 @@ public class LeaseServiceApplication {
 
     @Bean
     CommandLineRunner run(LeaseService leaseService) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
         return args -> {
             if (leaseService.getAllLease().isEmpty()) {
                 // Creating mock lease 1
@@ -38,7 +38,7 @@ public class LeaseServiceApplication {
 
                     // Creating mock Lease1
                     leaseRequest1 = new LeaseRequest(
-                            Long.valueOf("2"),
+                            "2",
                             Long.valueOf("100"),
                             startDate,
                             endDate1,
@@ -50,7 +50,7 @@ public class LeaseServiceApplication {
 
                     // Creating mock Lease 2
                     leaseRequest2 = new LeaseRequest(
-                            Long.valueOf("3"),
+                            "3",
                             Long.valueOf("101"),
                             startDate,
                             endDate2,

@@ -1,6 +1,5 @@
 package com.lisi.booknavigator.leaseservice.dto;
 
-import com.lisi.booknavigator.leaseservice.model.LeaseType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LeaseRequest {
-    private Long propertyId;
+    private String propertyId;
     private Long tenantUserId;
     private Date startDate;
     private Date endDate;

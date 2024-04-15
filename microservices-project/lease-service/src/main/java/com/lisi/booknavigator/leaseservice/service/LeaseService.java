@@ -42,10 +42,10 @@ public class LeaseService {
 
         Lease savedLease = leaseRepository.save(lease);
 
-        LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
-        kafkaTemplate.send("LeasesTopic",event);
+        //LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
+        //kafkaTemplate.send("LeasesTopic",event);
 
-        log.info("lease {} is saved", lease.getId());
+        log.info("lease {} is saved", savedLease.getId());
     }
 
     public List<LeaseResponse> getAllLease(){
@@ -70,7 +70,7 @@ public class LeaseService {
                 .build();
     }
 
-    public LeaseResponse getLeaseById(String leaseId) {
+    public LeaseResponse getLeaseById(Long leaseId) {
         Optional<Lease> leaseOpt = leaseRepository.findById(leaseId);
         if (leaseOpt.isPresent()) {
             Lease lease = leaseOpt.get();
@@ -82,7 +82,7 @@ public class LeaseService {
         }
     }
 
-    public LeaseResponse updateLeaseById(String leaseId, LeaseRequest leaseRequest) {
+    public LeaseResponse updateLeaseById(Long leaseId, LeaseRequest leaseRequest) {
         Optional<Lease> leaseOpt = leaseRepository.findById(leaseId);
         if (leaseOpt.isPresent()) {
             Lease lease = leaseOpt.get();
@@ -102,7 +102,7 @@ public class LeaseService {
             Lease updatedLease = leaseRepository.save(lease);
 
             // convert the updated lease to response object
-            log.info("lease {} updated", lease);
+            log.info("lease {} updated", updatedLease);
             return mapToLeaseResponse(updatedLease);
         } else {
             log.info("lease ID {} not found.", leaseId);
@@ -110,7 +110,7 @@ public class LeaseService {
         }
     }
 
-    public boolean deleteLeaseById(String leaseId) {
+    public boolean deleteLeaseById(Long leaseId) {
         if (leaseRepository.existsById(leaseId)) {
             leaseRepository.deleteById(leaseId);
             log.info("lease ID {} deleted", leaseId);
