@@ -44,7 +44,7 @@ public class LeaseServiceApplication {
                             endDate1,
                             Float.valueOf("1050"),
                             Float.valueOf("500"),
-                            "ACTIVE",
+                            LeaseType.ACTIVE,
                             "2 years"
                     );
 
@@ -56,7 +56,7 @@ public class LeaseServiceApplication {
                             endDate2,
                             Float.valueOf("1250"),
                             Float.valueOf("700"),
-                            "ACTIVE",
+                            LeaseType.ACTIVE,
                             "5 years"
                     );
                 } catch (ParseException e) {
