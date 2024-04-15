@@ -18,7 +18,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '19'  # 修改为目前可用的最高版本，例如 19
+        java-version: '21'  
         distribution: 'temurin'
         cache: maven
 
