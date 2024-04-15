@@ -406,6 +406,12 @@ Add the property service to the backend project.
 To Do:
 Add the search service to the backend project. Update local docker development environment to include property service and search service.
 
+Participant 4: Ashok
+Done:
+Working in property on Lease 
+To Do:
+Fix the bugs for the Lease service.
+
 
 Daily Scrum Meeting - April 13, 2024
 
@@ -428,4 +434,10 @@ To Do:
 Challenges:
   make sure teammates to understand and complete tasks in time
 
+
+Participant 4: Ashok
+Done:
+Work in property on Lease Histories
+To Do:
+Fix the bugs for the Lease History.
 
