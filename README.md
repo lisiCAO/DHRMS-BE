@@ -7,7 +7,7 @@ This document outlines the best practices for using the Gitflow workflow in our 
 ### Main Branches
 
 - `main`/`master`: This branch contains the official release history. Always ensure the code on the `main` branch is in a deployable state.
-- `develop`: This is the main development branch containing the next release cycle's code. All feature branches are branched from and merged back into `develop`.
+- `develop`: This is the main development branch containing the next release cycle's code. All feature branches are branched from and merged back into `develop`
 
 ### Supporting Branches
 
