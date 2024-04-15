@@ -449,3 +449,20 @@ Work in property on Lease Histories
 To Do:
 Fix the bugs for the Lease History.
 
+Daily Scrum Meeting - April 13, 2024
+
+Participant 1: Lisi
+
+Done:
+  set up GitHub Action to automatically create and push images to DockerHub with Jib
+  discussion with Shixin on the businiss logic of elasticsearch and search-service 
+  init file-service
+  import init files into k8s
+
+To Do:
+  midway presentation
+  complete file-service
+  reconsider frontend technology
+  
+Challenges:
+  delay in schedule due to learning
