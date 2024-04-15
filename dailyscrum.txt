@@ -435,6 +435,14 @@ Challenges:
   make sure teammates to understand and complete tasks in time
 
 
+Participant 3: Shixin
+Done:
+Create a new search service for the backend project. Update local docker development environment to include property service and search service.
+To Do:
+Learn how to to use elasticsearch service in out project.
+
+
+
 Participant 4: Ashok
 Done:
 Work in property on Lease Histories
