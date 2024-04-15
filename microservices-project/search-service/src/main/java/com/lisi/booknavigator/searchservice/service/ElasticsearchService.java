@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.service;
 
-import com.lisi.booknavigator.searchservice.entity.Product;
+import com.lisi.booknavigator.searchservice.entity.ElasticProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -21,19 +21,25 @@ public class ElasticsearchService {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
-    public List<Product> search(String processQuery) {
-        Criteria criteria = new Criteria("name").contains(processQuery)
-                .or(new Criteria("description").contains(processQuery));
+    public List<ElasticProperty> search(String processQuery) {
+        Criteria criteria = new Criteria("ownerUserId").contains(processQuery)
+                .or(new Criteria("address").contains(processQuery))
+                .or(new Criteria("postcode").contains(processQuery))
+                .or(new Criteria("propertyType").contains(processQuery))
+                .or(new Criteria("propertyDescription").contains(processQuery))
+                .or(new Criteria("status").contains(processQuery));
+
         Query searchQuery = new CriteriaQuery(criteria);
-        SearchHits<Product> searchHits = elasticsearchOperations.search(searchQuery, Product.class);
+
+        SearchHits<ElasticProperty> searchHits = elasticsearchOperations.search(searchQuery, ElasticProperty.class);
         return searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList());
     }
 
-    public void saveOrUpdateProduct(Product product) {
-        elasticsearchOperations.save(product);
+    public void saveOrUpdateProperty(ElasticProperty elasticProperty) {
+        elasticsearchOperations.save(elasticProperty);
     }
 
-    public void deleteProduct(String productId) {
-        elasticsearchOperations.delete(productId, Product.class);
+    public void deleteProperty(String propertyId) {
+        elasticsearchOperations.delete(propertyId, ElasticProperty.class);
     }
 }
