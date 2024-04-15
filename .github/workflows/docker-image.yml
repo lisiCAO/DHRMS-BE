@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
     paths: ["microservices-project/**"]
   pull_request:
-    branches: [ "devlop" ]
+    branches: [ "develop" ]
 
 jobs:
 
