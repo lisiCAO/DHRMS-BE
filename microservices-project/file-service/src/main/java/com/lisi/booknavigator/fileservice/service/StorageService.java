@@ -20,8 +20,7 @@ public class StorageService {
     private final ResourceLoader resourceLoader;
 
     public StorageResponse uploadFile(MultipartFile file, String fileType) throws IOException {
-        String bucketName = determineBucketName(fileType);
-        String blobPath = "gs://" + bucketName + "/" + file.getOriginalFilename();
+        String blobPath = "gs://" + determineBucketName(fileType) + "/" + file.getOriginalFilename();
         WritableResource resource = (WritableResource) resourceLoader.getResource(blobPath);
 
         try (OutputStream os = resource.getOutputStream()) {
@@ -35,11 +34,12 @@ public class StorageService {
     }
 
     private String determineBucketName(String fileType) {
+        String bucketBasePath = "dhrms-realestate-image";
         return switch (fileType.toLowerCase()) {
-            case "image" -> "image-bucket";
-            case "document" -> "document-bucket";
-            case "video" -> "video-bucket";
-            default -> "default-bucket";
+            case "image" -> bucketBasePath + "/images";
+            case "document" -> bucketBasePath + "/documents";
+            case "video" -> bucketBasePath + "/videos";
+            default -> bucketBasePath + "/others";
         };
     }
 }
