@@ -1,6 +1,6 @@
 # Gitflow Best Practices
 
-This document outlines the best practices for using the Gitflow workflow in our projects. Gitflow is a branching model designed around the project release. This model helps us manage our projects more efficiently by defining the roles of different branches and when they should be used.
+This document outlines the best practices for using the Gitflow workflow in our projects. Gitflow is a branching model designed around the project release. This model helps us manage our projects more efficiently by defining the roles of different branches and when they should be used
 
 ## Branching Strategy
 
