@@ -1,0 +1,38 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "develop" ]
+    paths: ["microservices-project/**"]
+  pull_request:
+    branches: [ "devlop" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Maven clean and compile
+      run: mvn -B clean compile
+      working-directory: ./microservices-project
+
+    - name: Build and push Docker image with Jib
+      run: mvn compile jib:build
+      working-directory: ./microservices-project
+      env:
+        # Ensure that Docker Hub credentials are set in GitHub Secrets
+        # These are used by Jib to push the built image
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
