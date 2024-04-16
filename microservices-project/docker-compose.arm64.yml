@@ -109,7 +109,7 @@ services:
     platform: linux/arm64
     image: lisicao/discovery-server:latest
     container_name: discovery-server
-    
+    pull_policy: always
     ports:
       - "8761:8761"
     environment:
@@ -123,7 +123,7 @@ services:
     platform: linux/arm64
     image: lisicao/api-gateway:latest
     container_name: api-gateway
-    
+    pull_policy: always
     ports:
       - "8181:8080"
     expose:
@@ -172,6 +172,7 @@ services:
   file-service:
     container_name: file-service
     image: lisicao/file-service:latest
+    pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/file-service
@@ -205,7 +206,7 @@ services:
     platform: linux/arm64
     container_name: property-service
     image: lisicao/property-service:latest
-
+    pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/property-service
@@ -220,7 +221,7 @@ services:
     platform: linux/arm64
     container_name: search-service
     image: lisicao/search-service:latest
-    
+    pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - OPENAI_API_KEY=test
@@ -274,6 +275,7 @@ services:
     platform: linux/arm64
     container_name: lease-service
     image: lisicao/lease-service:latest
+    pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/lease-service
