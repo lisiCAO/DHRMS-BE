@@ -488,4 +488,12 @@ To Do:
 Fix bugs in lease service, test lease service with postman.
 Integrate lease service into docker environment.
 
+Participant 4: Ashok
+Done:
+Edit the Lease Histories for postgreSQL
+Challanges:
+Docker Desktop is crashing 
+To Do: 
+Start new micro services feature for backend.
+
 
