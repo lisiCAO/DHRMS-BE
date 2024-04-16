@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.service;
 
-import com.lisi.booknavigator.searchservice.entity.Product;
+import com.lisi.booknavigator.searchservice.entity.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class SearchService {
         this.elasticsearchService = elasticsearchService;
     }
 
-    public List<Product> performSearch(String userInput) {
+    public List<Property> performSearch(String userInput) {
         String processedQuery = openAiService.processQuery(userInput);
         return elasticsearchService.search(processedQuery);
     }

@@ -107,6 +107,9 @@ public class PropertyService {
             // save the updated property
             Property updatedProperty = propertyRepository.save(property);
 
+            PropertyEvent event = new PropertyEvent(updatedProperty.getId(), PropertyEvent.EventType.UPDATE, updatedProperty);
+            kafkaTemplate.send("propertiesTopic",event);
+
             // convert the updated property to response object
             log.info("Property {} updated", property);
             return mapToPropertyResponse(updatedProperty);
@@ -119,6 +122,10 @@ public class PropertyService {
     public boolean deletePropertyById(String propertyId) {
         if (propertyRepository.existsById(propertyId)) {
             propertyRepository.deleteById(propertyId);
+
+            PropertyEvent event = new PropertyEvent(propertyId, PropertyEvent.EventType.DELETE, null);
+            kafkaTemplate.send("propertiesTopic",event);
+
             log.info("Property ID {} deleted", propertyId);
             return true; // delete operation executed successfully
         } else {

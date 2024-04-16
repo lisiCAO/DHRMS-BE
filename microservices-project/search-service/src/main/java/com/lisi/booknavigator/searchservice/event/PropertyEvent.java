@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.event;
 
-import com.lisi.booknavigator.searchservice.entity.Product;
+import com.lisi.booknavigator.searchservice.entity.Property;
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,11 +8,11 @@ import lombok.*;
 @Getter
 @Setter
 @Data
-public class ProductEvent {
+public class PropertyEvent {
 
-    private String productId;
+    private String propertyId;
     private EventType eventType;
-    private Product product;
+    private Property property;
 
     public enum EventType {
         CREATE, UPDATE, DELETE
