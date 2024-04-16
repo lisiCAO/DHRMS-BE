@@ -449,7 +449,7 @@ Work in property on Lease Histories
 To Do:
 Fix the bugs for the Lease History.
 
-Daily Scrum Meeting - April 13, 2024
+Daily Scrum Meeting - April 14, 2024
 
 Participant 1: Lisi
 
@@ -467,9 +467,25 @@ To Do:
 Challenges:
   delay in schedule due to learning
 
+Participant 3: Shixin
+Done:
+Add feature in search service, using elasticsearch service to search text in the property data.
+To Do:
+Add the search service in docker environment.
+
 Participant 4: Ashok
 Done:
 Work fixing bugs on Lease Histories
 Challanges:
 Assign port and run on local database for lease and Lease History.
+
+Daily Scrum Meeting - April 15, 2024
+
+Participant 3: Shixin
+Done:
+Finish search service, using elasticsearch service to search text in the property data.
+To Do:
+Fix bugs in lease service, test lease service with postman.
+Integrate lease service into docker environment.
+
 
