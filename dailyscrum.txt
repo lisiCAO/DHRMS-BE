@@ -377,7 +377,7 @@ complexity.
 Participant 2: Zhi
 
 Done:
-Complete property list nad property create pag
+Complete property list and property create page
 Complete user profile
 To Do:
 Prepare for the first sprint
@@ -434,6 +434,16 @@ To Do:
 Challenges:
   make sure teammates to understand and complete tasks in time
 
+Participant 2: Zhi
+
+Done:
+Complete property list and property create page
+Complete user profile
+To Do:
+Fix bugs
+Challenges:
+Complete the first part for sprint
+
 
 Participant 3: Shixin
 Done:
@@ -467,6 +477,18 @@ To Do:
 Challenges:
   delay in schedule due to learning
 
+Participant 2: Zhi
+
+Done:
+Complete property list and property create page
+Complete user profile
+To Do:
+Recover some code for first sprint
+Connect frontend to back end
+Challenges:
+Complete the first part for sprint
+
+
 Participant 3: Shixin
 Done:
 Add feature in search service, using elasticsearch service to search text in the property data.
@@ -480,6 +502,16 @@ Challanges:
 Assign port and run on local database for lease and Lease History.
 
 Daily Scrum Meeting - April 15, 2024
+
+Participant 2: Zhi
+
+Done:
+Recover the code for first sprint
+To Do:
+Fix some issues
+Connect frontend to back end
+Challenges:
+Complete the first part for sprint
 
 Participant 3: Shixin
 Done:
