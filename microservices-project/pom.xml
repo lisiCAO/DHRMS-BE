@@ -24,6 +24,7 @@
         <module>notification-service</module>
         <module>search-service</module>
         <module>property-service</module>
+        <module>lease-service</module>
         <module>file-service</module>
     </modules>
 
