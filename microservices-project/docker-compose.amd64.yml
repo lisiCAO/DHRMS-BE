@@ -242,3 +242,18 @@ services:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     networks:
       - microservices-network
+
+  lease-service:
+    container_name: lease-service
+    image: lisicao/lease-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/lease-service
+    depends_on:
+      - postgres-dhrms
+      - broker
+      - zipkin
+      - discovery-server
+      - api-gateway
+    networks:
+      - microservices-network
