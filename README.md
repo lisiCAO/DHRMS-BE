@@ -1,13 +1,13 @@
 # Gitflow Best Practices
 
-This document outlines the best practices for using the Gitflow workflow in our projects. Gitflow is a branching model designed around the project release. This model helps us manage our projects more efficiently by defining the roles of different branches and when they should be used.
+This document outlines the best practices for using the Gitflow workflow in our projects. Gitflow is a branching model designed around the project release. This model helps us manage our projects more efficiently by defining the roles of different branches and when they should be used
 
 ## Branching Strategy
 
 ### Main Branches
 
 - `main`/`master`: This branch contains the official release history. Always ensure the code on the `main` branch is in a deployable state.
-- `develop`: This is the main development branch containing the next release cycle's code. All feature branches are branched from and merged back into `develop`.
+- `develop`: This is the main development branch containing the next release cycle's code. All feature branches are branched from and merged back into `develop`
 
 ### Supporting Branches
 

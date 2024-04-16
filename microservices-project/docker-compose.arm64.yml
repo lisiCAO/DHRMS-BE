@@ -138,51 +138,65 @@ services:
     networks:
       - microservices-network
 
-  product-service:
-    platform: linux/arm64
-    container_name: product-service
-    image: lisicao/product-service:latest
-    
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/product-service
-    depends_on:
-      - mongo
-      - discovery-server
-      - api-gateway
-    networks:
-      - microservices-network
+#  product-service:
+#    platform: linux/arm64
+#    container_name: product-service
+#    image: lisicao/product-service:latest
+#
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/product-service
+#    depends_on:
+#      - mongo
+#      - discovery-server
+#      - api-gateway
+#    networks:
+#      - microservices-network
 
-  order-service:
-    platform: linux/arm64
-    container_name: order-service
-    image: lisicao/order-service:latest
+#  order-service:
+#    platform: linux/arm64
+#    container_name: order-service
+#    image: lisicao/order-service:latest
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/order-service
+#    depends_on:
+#      - postgres-dhrms
+#      - broker
+#      - zipkin
+#      - discovery-server
+#      - api-gateway
+#    networks:
+#      - microservices-network
+
+  file-service:
+    container_name: file-service
+    image: lisicao/file-service:latest
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/order-service
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/file-service
     depends_on:
       - postgres-dhrms
-      - broker
       - zipkin
       - discovery-server
       - api-gateway
     networks:
       - microservices-network
 
-  inventory-service:
-    platform: linux/arm64
-    container_name: inventory-service
-    image: lisicao/inventory-service:latest
-    
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/inventory-service
-    depends_on:
-      - postgres-dhrms
-      - discovery-server
-      - api-gateway
-    networks:
-      - microservices-network
+#  inventory-service:
+#    platform: linux/arm64
+#    container_name: inventory-service
+#    image: lisicao/inventory-service:latest
+#
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/inventory-service
+#    depends_on:
+#      - postgres-dhrms
+#      - discovery-server
+#      - api-gateway
+#    networks:
+#      - microservices-network
 
   property-service:
     platform: linux/arm64
@@ -215,20 +229,20 @@ services:
     networks:
       - microservices-network
 
-  notification-service:
-    platform: linux/arm64
-    container_name: notification-service
-    image: lisicao/notification-service:latest
-    
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - zipkin
-      - broker
-      - discovery-server
-      - api-gateway
-    networks:
-      - microservices-network
+#  notification-service:
+#    platform: linux/arm64
+#    container_name: notification-service
+#    image: lisicao/notification-service:latest
+#
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - zipkin
+#      - broker
+#      - discovery-server
+#      - api-gateway
+#    networks:
+#      - microservices-network
 
   elasticsearch:
     image: elasticsearch:8.12.2

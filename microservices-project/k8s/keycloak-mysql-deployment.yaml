@@ -35,6 +35,13 @@ spec:
               value: keycloak
           image: mysql:8.3
           name: keycloak-mysql
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: keycloak-mysql-claim0

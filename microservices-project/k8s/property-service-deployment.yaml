@@ -23,14 +23,20 @@ spec:
     spec:
       containers:
         - env:
-            - name: SPRING_DATA_MONGODB_URI
-              value: mongodb://mongo:27017/property-service
             - name: SPRING_PROFILES_ACTIVE
               value: docker
+            - name: SPRING_DATA_MONGODB_URI
+              value: mongodb://mongo:27017/property-service
           image: lisicao/property-service:latest
+          imagePullPolicy: Always
           name: property-service
-          ports:
-            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -39,7 +45,10 @@ metadata:
   name: property-service
 spec:
   ports:
-    - port: 8080
+    - name: "80"
+      port: 80
       targetPort: 8080
   selector:
     io.kompose.service: property-service
+status:
+  loadBalancer: {}

@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: order-service
+  strategy: {}
   template:
     metadata:
       annotations:
@@ -24,13 +25,18 @@ spec:
       containers:
         - env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-dhrms:5432/order-service
+              value: jdbc:postgresql://postgres-order:5431/order-service
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           image: lisicao/order-service:latest
           name: order-service
-          ports:
-            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "250m"
+              memory: "512Mi"
       restartPolicy: Always
 ---
 apiVersion: v1
@@ -39,7 +45,10 @@ metadata:
   name: order-service
 spec:
   ports:
-    - port: 8080
-      targetPort: 8080
+    - name: "80"
+      port: 80
+      targetPort: 9193
   selector:
-    io.kompose.service: order-service
+    io.kompose.service: order-service  # 与 Deployment 选择器匹配
+status:
+  loadBalancer: {}

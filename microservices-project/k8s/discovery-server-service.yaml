@@ -14,3 +14,5 @@ spec:
       targetPort: 8761
   selector:
     io.kompose.service: discovery-server
+status:
+  loadBalancer: {}
