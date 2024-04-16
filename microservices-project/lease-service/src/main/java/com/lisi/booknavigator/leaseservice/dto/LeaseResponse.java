@@ -19,6 +19,6 @@ public class LeaseResponse {
         private Date endDate;
         private Float monthlyRent;
         private Float deposit;
-        private LeaseType leaseStatus;
+        private String leaseStatus;
         private String terms;
 }

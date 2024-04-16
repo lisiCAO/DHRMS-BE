@@ -2,7 +2,6 @@ package com.lisi.booknavigator.leaseservice.service;
 
 import com.lisi.booknavigator.leaseservice.dto.LeaseRequest;
 import com.lisi.booknavigator.leaseservice.dto.LeaseResponse;
-//import com.lisi.booknavigator.leaseservice.event.leaseEvent;
 import com.lisi.booknavigator.leaseservice.event.LeaseEvent;
 
 import com.lisi.booknavigator.leaseservice.model.Lease;
@@ -11,8 +10,6 @@ import com.lisi.booknavigator.leaseservice.repository.LeaseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
-//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +39,8 @@ public class LeaseService {
 
         Lease savedLease = leaseRepository.save(lease);
 
-        //LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
-        //kafkaTemplate.send("LeasesTopic",event);
+        LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
+        kafkaTemplate.send("leasesTopic",event);
 
         log.info("lease {} is saved", savedLease.getId());
     }
@@ -101,6 +98,9 @@ public class LeaseService {
             // save the updated lease
             Lease updatedLease = leaseRepository.save(lease);
 
+            LeaseEvent event = new LeaseEvent(updatedLease.getId(), LeaseEvent.EventType.UPDATE, updatedLease);
+            kafkaTemplate.send("leasesTopic",event);
+
             // convert the updated lease to response object
             log.info("lease {} updated", updatedLease);
             return mapToLeaseResponse(updatedLease);
@@ -113,6 +113,10 @@ public class LeaseService {
     public boolean deleteLeaseById(Long leaseId) {
         if (leaseRepository.existsById(leaseId)) {
             leaseRepository.deleteById(leaseId);
+
+            LeaseEvent event = new LeaseEvent(leaseId, LeaseEvent.EventType.DELETE, null);
+            kafkaTemplate.send("leasesTopic",event);
+
             log.info("lease ID {} deleted", leaseId);
             return true; // delete operation executed successfully
         } else {
