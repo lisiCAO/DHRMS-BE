@@ -79,3 +79,5 @@ yarn-debug.log*
 yarn-error.log*
 
 microservices-project/docker-compose.yml
+
+!init/init.sql
