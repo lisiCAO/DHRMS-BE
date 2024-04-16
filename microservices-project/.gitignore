@@ -47,3 +47,4 @@ microservices-project/mysql_keycloak_data/
 /mongo-data/
 /mysql_keycloak_data/
 /grafana/
+/postgres-dhrms/
