@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.service;
 
-import com.lisi.booknavigator.searchservice.entity.ElasticProperty;
+import com.lisi.booknavigator.searchservice.entity.Property;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -21,7 +21,7 @@ public class ElasticsearchService {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
-    public List<ElasticProperty> search(String processQuery) {
+    public List<Property> search(String processQuery) {
         Criteria criteria = new Criteria("ownerUserId").contains(processQuery)
                 .or(new Criteria("address").contains(processQuery))
                 .or(new Criteria("postcode").contains(processQuery))
@@ -31,15 +31,16 @@ public class ElasticsearchService {
 
         Query searchQuery = new CriteriaQuery(criteria);
 
-        SearchHits<ElasticProperty> searchHits = elasticsearchOperations.search(searchQuery, ElasticProperty.class);
+        SearchHits<Property> searchHits = elasticsearchOperations.search(searchQuery, Property.class);
         return searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList());
     }
 
-    public void saveOrUpdateProperty(ElasticProperty elasticProperty) {
-        elasticsearchOperations.save(elasticProperty);
+    public void saveOrUpdateProperty(Property property) {
+        elasticsearchOperations.save(property);
+        log.info("elasticsearchOperations.save(property) ok");
     }
 
     public void deleteProperty(String propertyId) {
-        elasticsearchOperations.delete(propertyId, ElasticProperty.class);
+        elasticsearchOperations.delete(propertyId, Property.class);
     }
 }

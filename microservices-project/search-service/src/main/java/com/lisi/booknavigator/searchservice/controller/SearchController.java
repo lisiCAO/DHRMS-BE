@@ -1,8 +1,7 @@
 package com.lisi.booknavigator.searchservice.controller;
 
-import com.lisi.booknavigator.searchservice.Dto.SearchResponse;
 import com.lisi.booknavigator.searchservice.Dto.SearchResponseProperty;
-import com.lisi.booknavigator.searchservice.entity.ElasticProperty;
+import com.lisi.booknavigator.searchservice.entity.Property;
 import com.lisi.booknavigator.searchservice.service.SearchService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class SearchController {
 
     @GetMapping
     public ResponseEntity<?> search(@RequestParam @NotBlank String query){
-        List<ElasticProperty> elasticPropertyResults = searchService.performSearch(query);
+        List<Property> elasticPropertyResults = searchService.performSearch(query);
         List<SearchResponseProperty> responses = elasticPropertyResults.stream()
                 .map(elasticProperty -> new SearchResponseProperty(elasticProperty.getId(), elasticProperty))
                 .collect(Collectors.toList());

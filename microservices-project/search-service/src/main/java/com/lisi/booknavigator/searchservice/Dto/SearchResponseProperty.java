@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.Dto;
 
-import com.lisi.booknavigator.searchservice.entity.ElasticProperty;
+import com.lisi.booknavigator.searchservice.entity.Property;
 
 
 import lombok.*;
@@ -11,5 +11,5 @@ import lombok.*;
 @Builder
 public class SearchResponseProperty {
     private String PropertyId;
-    private ElasticProperty elasticProperty;
+    private Property elasticProperty;
 }

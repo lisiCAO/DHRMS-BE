@@ -1,6 +1,6 @@
 package com.lisi.booknavigator.searchservice.event;
 
-import com.lisi.booknavigator.searchservice.entity.ElasticProperty;
+import com.lisi.booknavigator.searchservice.entity.Property;
 import lombok.*;
 
 @AllArgsConstructor
@@ -12,7 +12,7 @@ public class PropertyEvent {
 
     private String propertyId;
     private EventType eventType;
-    private ElasticProperty elasticProperty;
+    private Property property;
 
     public enum EventType {
         CREATE, UPDATE, DELETE
