@@ -503,6 +503,19 @@ Assign port and run on local database for lease and Lease History.
 
 Daily Scrum Meeting - April 15, 2024
 
+Participant 1: Lisi
+
+Done:
+  cooperate with shixin to complete search-service
+  complete file-service
+
+To Do:
+  midway presentation
+  connect frontend with backend
+
+Challenge:
+  frontend organise
+
 Participant 2: Zhi
 
 Done:
