@@ -80,3 +80,5 @@ yarn-error.log*
 microservices-project/docker-compose.yml
 
 !init/init.sql
+
+/init/atomic-optics-419416-abd72682717f.json

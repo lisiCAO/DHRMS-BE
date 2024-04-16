@@ -168,6 +168,9 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-dhrms:5432/file-service
+      - GOOGLE_APPLICATION_CREDENTIALS=/etc/google/auth/atomic-optics-419416-abd72682717f.json
+    volumes:
+      - ./init/atomic-optics-419416-abd72682717f.json:/etc/google/auth/atomic-optics-419416-abd72682717f.json
     depends_on:
       - postgres-dhrms
       - zipkin
@@ -213,8 +216,8 @@ services:
       - OPENAI_API_KEY=test
     depends_on:
       - elasticsearch
-      - product-service
       - discovery-server
+      - property-service
       - api-gateway
     networks:
       - microservices-network
