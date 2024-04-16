@@ -25,7 +25,6 @@
         <module>search-service</module>
         <module>property-service</module>
         <module>lease-service</module>
-        <module>leasehistory-service</module>
         <module>file-service</module>
     </modules>
 
