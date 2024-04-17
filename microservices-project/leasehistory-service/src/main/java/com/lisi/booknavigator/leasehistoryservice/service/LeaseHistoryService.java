@@ -63,7 +63,7 @@ public class LeaseHistoryService {
 
     }
 
-    public LeaseHistoryResponse getPropertyById(String historyId) {
+    public LeaseHistoryResponse getLeaseHistoryById(String historyId) {
         Optional<LeaseHistory> leaseHistoryOpt = leaseHistoryRepository.findById(historyId);
         if (leaseHistoryOpt.isPresent()) {
             LeaseHistory leaseHistory = leaseHistoryOpt.get();

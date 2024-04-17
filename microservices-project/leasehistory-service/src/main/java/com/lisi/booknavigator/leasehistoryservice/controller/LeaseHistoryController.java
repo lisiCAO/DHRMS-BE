@@ -34,14 +34,14 @@ public class LeaseHistoryController {
 
 
     @GetMapping("/{leasehistoryId}")
-    public ResponseEntity<Object> getLeaseHistoryById(@PathVariable String historyId) {
+    public ResponseEntity<Object> getLeaseHistoryById(@PathVariable String leasehistoryId) {
         try {
-            LeaseHistoryResponse leasehistory = leasehistoryService.getPropertyById(historyId);
+            LeaseHistoryResponse leasehistory = leasehistoryService.getLeaseHistoryById(leasehistoryId);
             if (leasehistory != null) {
-                log.info("leasehistory Id {} retrieved successfully.", historyId);
+                log.info("leasehistory Id {} retrieved successfully.", leasehistoryId);
                 return ResponseEntity.ok(leasehistory);
             } else {
-                log.info("leasehistory ID {} not found.", historyId);
+                log.info("leasehistory ID {} not found.", leasehistoryId);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("leasehistory not found.");
             }
         } catch (Exception e) {
