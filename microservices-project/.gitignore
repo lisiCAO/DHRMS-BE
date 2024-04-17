@@ -48,8 +48,12 @@ microservices-project/elasticsearch-data/
 /mongo-data/
 /mysql_keycloak_data/
 /grafana/
+<<<<<<< HEAD
 /elasticsearch-data/
 
 /postgres-dhrms/
 /postgres-data/
 /init/atomic-optics-419416-abd72682717f.json
+=======
+/postgres-dhrms/
+>>>>>>> d7caa3aa1674d2a3ba1f9ecf0f22c303314df309
