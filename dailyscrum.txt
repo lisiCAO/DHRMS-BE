@@ -539,6 +539,17 @@ Edit the Lease Histories for postgreSQL
 Challanges:
 Docker Desktop is crashing 
 To Do: 
-Start new micro services feature for backend.
+Start new microservices feature for the backend.
+
+Daily Scrum Meeting - April 16, 2024
+
+Participant 3: Shixin
+Done:
+Pull and run a front-end project on my laptop. 
+Test the file service in docker. 
+
+To Do:
+Help Ashok to run all containers in docker on his computer.
+
 
 
