@@ -547,9 +547,16 @@ Participant 3: Shixin
 Done:
 Pull and run a front-end project on my laptop. 
 Test the file service in docker. 
-
 To Do:
 Help Ashok to run all containers in docker on his computer.
 
+Participant 4: Ashok
+Done:
+Worked on user-service.
+Make Docker Desktop run with some containers
+Challenges:
+Understand the database of elastic search and Delete and upload data property content to elastic search
+To Do: 
+Fix the bug for search-service
 
 
