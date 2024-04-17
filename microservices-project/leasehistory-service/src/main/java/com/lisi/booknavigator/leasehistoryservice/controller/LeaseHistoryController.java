@@ -19,7 +19,7 @@ public class LeaseHistoryController {
     private final LeaseHistoryService leasehistoryService;
 
     @PostMapping
-    public ResponseEntity<Object> createProperty(@RequestBody LeaseHistoryRequest leasehistoryRequest) {
+    public ResponseEntity<Object> createLeaseHistory(@RequestBody LeaseHistoryRequest leasehistoryRequest) {
         try {
             leasehistoryService.createLeaseHistory(leasehistoryRequest);
             log.info("leasehistory created successfully.");
