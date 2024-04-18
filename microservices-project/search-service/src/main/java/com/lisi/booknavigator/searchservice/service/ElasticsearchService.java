@@ -4,6 +4,7 @@ import com.lisi.booknavigator.searchservice.entity.Property;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.IndexOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Criteria;
@@ -42,5 +43,21 @@ public class ElasticsearchService {
 
     public void deleteProperty(String propertyId) {
         elasticsearchOperations.delete(propertyId, Property.class);
+    }
+
+    public void reloadProperties() {
+        // Delete all properties
+        IndexOperations indexOperations = elasticsearchOperations.indexOps(Property.class);
+        indexOperations.delete();
+
+        // Retrieve all properties
+        Query query = new CriteriaQuery(new Criteria("*"));
+        List<Property> allProperties = elasticsearchOperations.search(query, Property.class).stream()
+                .map(hit -> hit.getContent())
+                .collect(Collectors.toList());
+
+        // Save all properties back to Elasticsearch
+        allProperties.forEach(this::saveOrUpdateProperty);
+        log.info("Reloaded all properties to Elasticsearch");
     }
 }
