@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface FileRepository extends JpaRepository<File, Integer> {
+public interface FileRepository extends JpaRepository<File, Long> {
     // 查询特定关联实体ID的文件
-    List<File> findByAssociatedEntityId(Integer associatedEntityId);
+    List<File> findByAssociatedEntityId(Long associatedEntityId);
 
     // 查询特定关联实体类型的文件
     List<File> findByAssociatedEntityType(String associatedEntityType);

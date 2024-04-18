@@ -49,12 +49,35 @@ public class FileService {
         }
     }
 
-    public List<File> listFiles(Integer associatedEntityId, String associatedEntityType) {
+    public List<File> listFiles(Long associatedEntityId, String associatedEntityType) {
         // Here we might need to add logic to filter based on parameters
         return fileRepository.findAll();
     }
 
-    public File getFileById(Integer fileId) {
+    public File getFileById(Long fileId) {
         return fileRepository.findById(fileId).orElse(null);
+    }
+
+    public void deleteSingleFileById(Long fileId) throws IOException {
+        Span deleteSpan = tracer.nextSpan().name("Delete File Service Call");
+        try (Tracer.SpanInScope ws = tracer.withSpan(deleteSpan.start())) {
+            log.info("Attempting to delete file with ID {} from GCS", fileId);
+
+            File file = fileRepository.findById(fileId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid file ID: " + fileId));
+
+            storageService.deleteSingleFile(file.getUrl());
+            fileRepository.delete(file);
+
+            log.info("File with ID {} has been successfully deleted", fileId);
+        } catch (IOException e) {
+            log.error("Failed to delete file from storage: {}", e.getMessage());
+            throw new IOException("Failed to delete file", e);
+        } catch (IllegalArgumentException e) {
+            log.error("Failed to find file with ID {}: {}", fileId, e.getMessage());
+            throw new IllegalArgumentException("File not found", e);
+        } finally {
+            deleteSpan.end();
+        }
     }
 }

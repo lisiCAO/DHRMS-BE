@@ -43,14 +43,14 @@ public class FileController {
     }
 
     @GetMapping
-    public ResponseEntity<List<File>> listFiles(@RequestParam(required = false) Integer associatedEntityId,
+    public ResponseEntity<List<File>> listFiles(@RequestParam(required = false) Long associatedEntityId,
                                                 @RequestParam(required = false) String associatedEntityType) {
         List<File> files = fileService.listFiles(associatedEntityId, associatedEntityType);
         return ResponseEntity.ok(files);
     }
 
     @GetMapping("/{fileId}")
-    public ResponseEntity<File> getFile(@PathVariable Integer fileId) {
+    public ResponseEntity<File> getFile(@PathVariable Long fileId) {
         File file = fileService.getFileById(fileId);
         return file != null ? ResponseEntity.ok(file) : ResponseEntity.notFound().build();
     }
@@ -59,4 +59,35 @@ public class FileController {
         log.info("Cannot Save File Executing Fallback logic");
         return CompletableFuture.supplyAsync(() -> "Oops! Something went wrong, please upload file after some times!") ;
     }
+
+    @DeleteMapping("/single/{fileId}")
+    @CircuitBreaker(name = "storage", fallbackMethod = "deleteFallback")
+    @TimeLimiter(name = "storage")
+    @Retry(name = "storage")
+    public CompletableFuture<ResponseEntity<Object>> deleteSingleFileById(@PathVariable Long fileId) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                fileService.deleteSingleFileById(fileId);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } catch (IOException e) {
+                log.error("Error deleting file: {}", e.getMessage());
+                throw new RuntimeException("Error deleting file due to internal server error", e);
+            } catch (IllegalArgumentException e) {
+                log.error("Error finding file: {}", e.getMessage());
+                throw new IllegalArgumentException("File not found", e);
+            }
+        }).exceptionally(ex -> {
+            if (ex.getCause() instanceof IllegalArgumentException) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        });
+    }
+
+    public CompletableFuture<ResponseEntity<Void>> deleteFallback(Long fileId, Throwable e) {
+        log.info("Fallback triggered for deleteSingleFile");
+        return CompletableFuture.completedFuture(
+                ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build());
+    }
+
 }

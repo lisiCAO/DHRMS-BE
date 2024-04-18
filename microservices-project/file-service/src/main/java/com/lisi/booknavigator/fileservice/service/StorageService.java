@@ -42,4 +42,19 @@ public class StorageService {
             default -> bucketBasePath + "/others";
         };
     }
+
+    public void deleteSingleFile(String filePath) throws IOException {
+        WritableResource resource = (WritableResource) resourceLoader.getResource(filePath);
+        try {
+            boolean deleted = resource.getFile().delete();
+            if (!deleted) {
+                throw new IOException("Failed to delete file at " + filePath);
+            }
+            log.info("File deleted from Google Cloud Storage at {}", filePath);
+        } catch (IOException e) {
+            log.error("Failed to delete file from GCS: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
 }
