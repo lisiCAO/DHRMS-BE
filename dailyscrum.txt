@@ -543,6 +543,15 @@ Start new microservices feature for the backend.
 
 Daily Scrum Meeting - April 16, 2024
 
+Participant 1: Lisi
+
+Done:
+  presentation
+
+To Do:
+  rewrite Jira
+  rewrite frontend - start with home page
+
 Participant 3: Shixin
 Done:
 Pull and run a front-end project on my laptop. 
@@ -559,4 +568,27 @@ Understand the database of elastic search and Delete and upload data property co
 To Do: 
 Fix the bug for search-service
 
+Daily Scrum Meeting - April 17, 2024
 
+Participant 1: Lisi
+
+Done:
+  Jira stories
+  front- search, nav and footer components
+
+To Do:
+  frontend - google maps components
+  frontend - connections configuration: api services
+
+Daily Scrum Meeting - April 18, 2024
+
+Participant 1: Lisi
+
+Done:
+  start google map components
+  structure api-services
+  structure file architecture
+
+To Do:
+  frontend - finish google maps components 
+  frontend - start property details page
