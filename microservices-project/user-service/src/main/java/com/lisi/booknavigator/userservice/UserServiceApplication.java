@@ -2,6 +2,7 @@ package com.lisi.booknavigator.userservice;
 
 import com.lisi.booknavigator.userservice.dto.UserRequest;
 import com.lisi.booknavigator.userservice.model.UserType;
+import com.lisi.booknavigator.userservice.model.User_profile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,31 +26,25 @@ public class UserServiceApplication {
     CommandLineRunner run(UserService userService) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
         return args -> {
-            if (UserService.getAllUsers().isEmpty()) {
+            if (userService.getAllUsers().isEmpty()) {
                 // Creating mock Lease History 1
                 log.info("No Lease History found in the database. Creating mock Lease History.");
                 Date changeDate = dateFormat.parse("April 10, 2026");
-                LeaseHistoryRequest leaseHistoryRequest1 = new UserRequest(
+                UserRequest userRequest1 = new UserRequest(
+                        "username1",
+                        "username1@email.com",
+                        "This is passwordhash",
+                        UserType.TENANT,
+                        new User_profile( "user", "name", "1234569999", "12345 Rue Haymen , montreal, canada", "h4j6l9", 12424L),
+                        "English"
 
-                        Long.valueOf("4"),
-                        changeDate,
-                        LeaseHistoryType.RENEWAL,
-                        "2 years",
-                        "3 years"
                 );
 
-                // Creating mock Lease History 2
-                UserRequest leaseHistoryRequest2 = new UserRequest(
-                        Long.valueOf("4"),
-                        changeDate,
-                        LeaseHistoryType.TERMINATION,
-                        "2 years",
-                        "Terminated"
-                );
+
 
                 // Saving mock properties to the database
-                propertyService.createLeaseHistory(leaseHistoryRequest1);
-                propertyService.createLeaseHistory(leaseHistoryRequest2);
+                userService.createUser(userRequest1);
+                //userService.createUser(userRequest2);
                 log.info("Mock Lease History created successfully.");
             }
         };
