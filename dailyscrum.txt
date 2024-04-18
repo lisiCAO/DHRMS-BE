@@ -580,6 +580,14 @@ To Do:
   frontend - google maps components
   frontend - connections configuration: api services
 
+Participant 3: Shixin
+Done:
+Discussion about the backend requirement and development plan with Lisi. 
+Discussion about how to use elastic search service in the backend and the problem with our current search service.
+
+To Do:
+Read the code of the file service, implement and optimize the file service.
+
 Daily Scrum Meeting - April 18, 2024
 
 Participant 1: Lisi
@@ -592,3 +600,15 @@ Done:
 To Do:
   frontend - finish google maps components 
   frontend - start property details page
+
+Participant 3: Shixin
+Done:
+Test upload file to google cloud storage function of file service.
+Discuss and determine the data type of id filed of each entitiy of our database design.
+Add delete file from google cloud storage function of file servie.
+
+To Do:
+Implement api in file service:
+according entityid, entitytype retrieve file object list and order the list by upload time
+according entityid, entitytype filename retrieve file object (contain the search filename)
+input: filed, file object ,uplod file in google cloud storage
