@@ -588,6 +588,13 @@ Discussion about how to use elastic search service in the backend and the proble
 To Do:
 Read the code of the file service, implement and optimize the file service.
 
+Participant 4: Ashok
+Done:
+Added feature in search for deletion and get the data.
+Fixed bugs in lease histories.
+To Do: 
+Work in the user-serives and bugs.
+
 Daily Scrum Meeting - April 18, 2024
 
 Participant 1: Lisi
