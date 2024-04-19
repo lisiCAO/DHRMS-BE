@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public class FileService {
             }
             else {
                 //check if the file exists in the database
-                Optional<File> optionalFile = fileRepository.findByUrl(storageResponse.getUrl());
+                Optional<File> optionalFile = fileRepository.findByUrlContaining(storageResponse.getUrl());
                 if (optionalFile.isPresent()) {
                     log.info("file url = {} exists in the database", storageResponse.getUrl());
 
@@ -87,13 +88,27 @@ public class FileService {
         }
     }
 
+    // list all files in the database by the associatedEntityId and associatedEntityType
     public List<File> listFiles(Long associatedEntityId, String associatedEntityType) {
-        // Here we might need to add logic to filter based on parameters
-        return fileRepository.findAll();
+        Sort sort = Sort.by(Sort.Direction.DESC, "uploadDate");
+
+        if (associatedEntityId != null && associatedEntityType != null) {
+            return fileRepository.findByAssociatedEntityIdAndAssociatedEntityType(associatedEntityId, associatedEntityType, sort);
+        } else if (associatedEntityId != null) {
+            return fileRepository.findByAssociatedEntityId(associatedEntityId, sort);
+        } else if (associatedEntityType != null) {
+            return fileRepository.findByAssociatedEntityType(associatedEntityType, sort);
+        } else {
+            return fileRepository.findAll(sort); // find all files in the database sorted by uploadDate
+        }
     }
 
     public File getFileById(Long fileId) {
         return fileRepository.findById(fileId).orElse(null);
+    }
+
+    public File findByUrlContaining(String url) {
+        return fileRepository.findByUrlContaining(url).orElse(null);
     }
 
     public void deleteSingleFileById(Long fileId) throws IOException {

@@ -16,7 +16,7 @@ public class FileResponse {
 
     private URL publicUrl;
 
-    private String GCDUrl;
+    private String GCSUrl;
 
     private String fileName;
 
