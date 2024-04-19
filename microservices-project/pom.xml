@@ -26,6 +26,7 @@
         <module>property-service</module>
         <module>lease-service</module>
         <module>file-service</module>
+        <module>payment-service</module>
     </modules>
 
     <properties>
