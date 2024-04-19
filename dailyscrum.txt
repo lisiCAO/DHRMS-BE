@@ -619,3 +619,20 @@ Implement api in file service:
 according entityid, entitytype retrieve file object list and order the list by upload time
 according entityid, entitytype filename retrieve file object (contain the search filename)
 input: filed, file object ,uplod file in google cloud storage
+
+Daily Scrum Meeting - April 19, 2024
+
+Participant 3: Shixin
+Done:
+Fix bug in upload file feature in file service to avoid creating duplicated records.
+Add feature: retrieve file data according associatedEntityId and associatedEntityType feature in file service.
+Add feature: convert google cloud storage gs:// url to public access URL
+Test file service api through Postman.
+
+To:
+Test search service.
+Test file service in docker.
+Test user register, login, logout in keycloak.
+
+
+
