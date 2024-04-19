@@ -68,11 +68,13 @@ public class StorageService {
      * @return The object name with leading slash, e.g., "/images/Alice.jpeg", or null if not found
      */
     public String getObjectName(String gcsPath) {
-        String[] parts = gcsPath.split("/");
-        if (parts.length > 3) {
-            return "/" + String.join("/", Arrays.copyOfRange(parts, 3, parts.length));
+        // get the index of the last slash after "gs://"
+        int lastIndex = gcsPath.lastIndexOf('/');
+        // if find the last slash and it is not the last character
+        if (lastIndex != -1 && lastIndex != gcsPath.length() - 1) {
+            return gcsPath.substring(lastIndex + 1);
         }
-        return null; // Return null or handle this case as you deem fit
+        return null;
     }
 
 
