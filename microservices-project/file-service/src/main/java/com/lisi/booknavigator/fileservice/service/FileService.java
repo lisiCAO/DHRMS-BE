@@ -27,6 +27,7 @@ import java.util.Optional;
 public class FileService {
     private final FileRepository fileRepository;
     private final StorageService storageService;
+    private final GoogleCloudStorageService googleCloudStorageService;
 
 //    private final KafkaTemplate<String, FileSavedEvent> kafkaTemplate;
     private final Tracer tracer;
@@ -107,10 +108,11 @@ public class FileService {
                 log.error("File with ID {} not found", fileId);
                 throw new IllegalArgumentException("File not found");
             }else {
-                log.info("File with ID {} found", fileId);
+                log.info("File with ID {} found, url {}", fileId, file.getUrl());
             }
 
-            storageService.deleteSingleFile(file.getUrl());
+            googleCloudStorageService.deleteSingleFileByUrl(file.getUrl());
+
             fileRepository.delete(file);
 
             log.info("File with ID {} has been successfully deleted", fileId);

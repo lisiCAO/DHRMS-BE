@@ -44,19 +44,22 @@ public class StorageService {
         };
     }
 
-    public void deleteSingleFile(String filePath) throws IOException {
-        WritableResource resource = (WritableResource) resourceLoader.getResource(filePath);
-        try {
-            boolean deleted = resource.getFile().delete();
-            if (!deleted) {
-                throw new IOException("Failed to delete file at " + filePath);
-            }
-            log.info("File deleted from Google Cloud Storage at {}", filePath);
-        } catch (IOException e) {
-            log.error("Failed to delete file from GCS: {}", e.getMessage(), e);
-            throw e;
-        }
-    }
+//    public void deleteSingleFile(String filePath) throws IOException {
+//        log.info("try to delete file from Google Cloud Storage at {}", filePath);
+//        WritableResource resource = (WritableResource) resourceLoader.getResource(filePath);
+//        try {
+//            log.info("begin delete...");
+//            boolean deleted = resource.getFile().delete();
+//            log.info("end delete...");
+//            if (!deleted) {
+//                throw new IOException("Failed to delete file at " + filePath);
+//            }
+//            log.info("File deleted from Google Cloud Storage at {}", filePath);
+//        } catch (IOException e) {
+//            log.error("Failed to delete file from GCS: {}", e.getMessage(), e);
+//            throw e;
+//        }
+//    }
 
     /**
      * Extracts the object name from a Google Cloud Storage path.

@@ -4,7 +4,7 @@ import com.lisi.booknavigator.fileservice.model.File;
 import com.lisi.booknavigator.fileservice.service.FileService;
 import com.lisi.booknavigator.fileservice.dto.FileRequest;
 import com.lisi.booknavigator.fileservice.dto.FileResponse;
-import com.lisi.booknavigator.fileservice.service.PublicUrlService;
+import com.lisi.booknavigator.fileservice.service.GoogleCloudStorageService;
 import com.lisi.booknavigator.fileservice.service.StorageService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -27,7 +27,7 @@ import java.util.concurrent.CompletableFuture;
 public class FileController {
 
     private final FileService fileService;
-    private final PublicUrlService publicUrlService;
+    private final GoogleCloudStorageService googleCloudStorageService;
     private final StorageService storageService;
 
     @PostMapping
@@ -65,7 +65,7 @@ public class FileController {
         }
         else {
             log.info("File found, fileId = {} ", fileId);
-            FileResponse fileResponse = new FileResponse(file.getId(), publicUrlService.generateSignedPublicUrl(file.getUrl()),storageService.getObjectName(file.getUrl()),file.getFileType(), file.getUploadDate(),
+            FileResponse fileResponse = new FileResponse(file.getId(), googleCloudStorageService.generateSignedPublicUrl(file.getUrl()),storageService.getObjectName(file.getUrl()),file.getFileType(), file.getUploadDate(),
                     file.getAssociatedEntityId(), file.getAssociatedEntityType(), file.getUserId());
             return ResponseEntity.ok(fileResponse);
 
