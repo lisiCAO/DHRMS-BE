@@ -21,6 +21,7 @@ import java.util.List;
 public class FileService {
     private final FileRepository fileRepository;
     private final StorageService storageService;
+    private final PublicUrlService publicUrlService;
 //    private final KafkaTemplate<String, FileSavedEvent> kafkaTemplate;
     private final Tracer tracer;
     public String saveFile(FileRequest fileRequest) throws IOException {
