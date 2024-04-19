@@ -622,6 +622,21 @@ input: filed, file object ,uplod file in google cloud storage
 
 Daily Scrum Meeting - April 19, 2024
 
+Participant 1: Lisi
+
+Done:
+  complete google map component
+  comments current codes
+  fix bugs in next/tailwind environments
+  clean home page to map pages workflow
+
+To Do:
+  frontend - property details page
+  frontend - authentication page
+
+Challenge: 
+  pressure to keep on details due to limit time
+
 Participant 3: Shixin
 Done:
 Fix bug in upload file feature in file service to avoid creating duplicated records.
