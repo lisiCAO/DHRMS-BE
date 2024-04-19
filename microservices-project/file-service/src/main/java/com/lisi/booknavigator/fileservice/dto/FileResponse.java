@@ -22,7 +22,7 @@ public class FileResponse {
 
     private LocalDateTime uploadDate;
 
-    private Long associatedEntityId;
+    private String associatedEntityId;
 
     private String associatedEntityType;
 
