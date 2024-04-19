@@ -18,7 +18,11 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
+<<<<<<< HEAD
         java-version: '21' 
+=======
+        java-version: '21'  
+>>>>>>> d7caa3aa1674d2a3ba1f9ecf0f22c303314df309
         distribution: 'temurin'
         cache: maven
 
