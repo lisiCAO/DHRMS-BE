@@ -18,7 +18,7 @@ public class FileResponse {
 
     private String GCDUrl;
 
-    private String fileType;
+    private String fileName;
 
     private LocalDateTime uploadDate;
 

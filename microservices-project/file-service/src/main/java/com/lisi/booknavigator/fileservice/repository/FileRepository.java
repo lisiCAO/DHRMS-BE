@@ -2,14 +2,18 @@ package com.lisi.booknavigator.fileservice.repository;
 
 import com.lisi.booknavigator.fileservice.model.File;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FileRepository extends JpaRepository<File, Long> {
-    // 查询特定关联实体ID的文件
+    // check if the associatedEntityId exists in the database
     List<File> findByAssociatedEntityId(Long associatedEntityId);
 
-    // 查询特定关联实体类型的文件
+    // check if the associatedEntityId exists in the database
     List<File> findByAssociatedEntityType(String associatedEntityType);
+
+    // check if the url exists in the database
+    Optional<File> findByUrl(String url);
 }

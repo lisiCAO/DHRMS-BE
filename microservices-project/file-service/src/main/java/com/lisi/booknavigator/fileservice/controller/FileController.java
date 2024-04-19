@@ -5,6 +5,7 @@ import com.lisi.booknavigator.fileservice.service.FileService;
 import com.lisi.booknavigator.fileservice.dto.FileRequest;
 import com.lisi.booknavigator.fileservice.dto.FileResponse;
 import com.lisi.booknavigator.fileservice.service.PublicUrlService;
+import com.lisi.booknavigator.fileservice.service.StorageService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -27,6 +28,7 @@ public class FileController {
 
     private final FileService fileService;
     private final PublicUrlService publicUrlService;
+    private final StorageService storageService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -53,7 +55,7 @@ public class FileController {
     }
 
     @GetMapping("/{fileId}")
-    public ResponseEntity<FileResponse> getFile(@PathVariable Long fileId) {
+    public ResponseEntity<FileResponse> getFileById(@PathVariable Long fileId) {
         File file = fileService.getFileById(fileId);
         if (file == null) {
 
@@ -63,7 +65,7 @@ public class FileController {
         }
         else {
             log.info("File found, fileId = {} ", fileId);
-            FileResponse fileResponse = new FileResponse(file.getId(), publicUrlService.generateSignedPublicUrl(file.getUrl()),file.getUrl(),file.getFileType(), file.getUploadDate(),
+            FileResponse fileResponse = new FileResponse(file.getId(), publicUrlService.generateSignedPublicUrl(file.getUrl()),storageService.getObjectName(file.getUrl()),file.getFileType(), file.getUploadDate(),
                     file.getAssociatedEntityId(), file.getAssociatedEntityType(), file.getUserId());
             return ResponseEntity.ok(fileResponse);
 

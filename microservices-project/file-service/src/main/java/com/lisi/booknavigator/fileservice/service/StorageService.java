@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class StorageService {
         }
     }
 
-    private String determineBucketName(String fileType) {
+    public String determineBucketName(String fileType) {
         String bucketBasePath = "dhrms-realestate-image";
         return switch (fileType.toLowerCase()) {
             case "image" -> bucketBasePath + "/images";
@@ -56,5 +57,20 @@ public class StorageService {
             throw e;
         }
     }
+
+    /**
+     * Extracts the object name from a Google Cloud Storage path.
+     *
+     * @param gcsPath The full GCS path, e.g., "gs://xxxxx-xxxxxxxx-image/images/Alice.jpeg"
+     * @return The object name with leading slash, e.g., "/images/Alice.jpeg", or null if not found
+     */
+    public String getObjectName(String gcsPath) {
+        String[] parts = gcsPath.split("/");
+        if (parts.length > 3) {
+            return "/" + String.join("/", Arrays.copyOfRange(parts, 3, parts.length));
+        }
+        return null; // Return null or handle this case as you deem fit
+    }
+
 
 }
