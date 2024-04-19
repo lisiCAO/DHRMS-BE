@@ -31,7 +31,7 @@ public class File {
     private LocalDateTime uploadDate;
 
     @NotNull(message = "Associated entity ID cannot be null")
-    private Long associatedEntityId;
+    private String associatedEntityId;
 
     @NotBlank(message = "Associated entity type cannot be blank")
     private String associatedEntityType;

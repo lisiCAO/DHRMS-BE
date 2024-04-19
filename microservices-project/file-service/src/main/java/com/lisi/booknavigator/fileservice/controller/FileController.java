@@ -54,7 +54,7 @@ public class FileController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FileResponse>> listFiles(@RequestParam(required = false) Long associatedEntityId,
+    public ResponseEntity<List<FileResponse>> listFiles(@RequestParam(required = false) String associatedEntityId,
                                                 @RequestParam(required = false) String associatedEntityType) {
         log.info("associatedEntityId = {}, associatedEntityType = {}", associatedEntityId, associatedEntityType);
 

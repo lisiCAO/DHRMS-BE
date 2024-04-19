@@ -15,7 +15,7 @@ public class FileRequest {
     private String fileType;
     private String url;
     private LocalDateTime uploadDate;
-    private Long associatedEntityId;
+    private String associatedEntityId;
     private String associatedEntityType;
     private Long userId;
 }

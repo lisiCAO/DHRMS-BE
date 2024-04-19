@@ -89,7 +89,7 @@ public class FileService {
     }
 
     // list all files in the database by the associatedEntityId and associatedEntityType
-    public List<File> listFiles(Long associatedEntityId, String associatedEntityType) {
+    public List<File> listFiles(String associatedEntityId, String associatedEntityType) {
         Sort sort = Sort.by(Sort.Direction.DESC, "uploadDate");
 
         if (associatedEntityId != null && associatedEntityType != null) {

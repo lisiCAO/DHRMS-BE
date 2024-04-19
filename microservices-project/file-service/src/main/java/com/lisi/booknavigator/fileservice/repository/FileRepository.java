@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface FileRepository extends JpaRepository<File, Long> {
     // check if the associatedEntityId exists in the database
-    List<File> findByAssociatedEntityId(Long associatedEntityId, Sort sort);
+    List<File> findByAssociatedEntityId(String associatedEntityId, Sort sort);
 
     // check if the associatedEntityId exists in the database
     List<File> findByAssociatedEntityType(String associatedEntityType, Sort sort);
 
     // check if the associatedEntityId and associatedEntityType exists in the database
-    List<File> findByAssociatedEntityIdAndAssociatedEntityType(Long associatedEntityId, String associatedEntityType, Sort sort);
+    List<File> findByAssociatedEntityIdAndAssociatedEntityType(String associatedEntityId, String associatedEntityType, Sort sort);
 
     // check if the url exists in the database
     Optional<File> findByUrlContaining(String url);
