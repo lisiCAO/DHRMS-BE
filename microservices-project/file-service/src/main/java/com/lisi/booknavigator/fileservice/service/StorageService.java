@@ -20,8 +20,8 @@ import java.util.Arrays;
 public class StorageService {
     private final ResourceLoader resourceLoader;
 
-    public StorageResponse uploadFile(MultipartFile file, String fileType) throws IOException {
-        String blobPath = "gs://" + determineBucketName(fileType) + "/" + file.getOriginalFilename();
+    public StorageResponse uploadFile(MultipartFile file, String fileType, String entityType, String entityId) throws IOException {
+        String blobPath = "gs://" + determineBucketName(fileType) + "/" + entityType + "/" +  entityId + "/" + file.getOriginalFilename();
         WritableResource resource = (WritableResource) resourceLoader.getResource(blobPath);
 
         try (OutputStream os = resource.getOutputStream()) {
@@ -64,8 +64,8 @@ public class StorageService {
     /**
      * Extracts the object name from a Google Cloud Storage path.
      *
-     * @param gcsPath The full GCS path, e.g., "gs://xxxxx-xxxxxxxx-image/images/Alice.jpeg"
-     * @return The object name with leading slash, e.g., "/images/Alice.jpeg", or null if not found
+     * @param gcsPath The full GCS path, e.g., "gs://xxxxx-xxxxxxxx-image/images/entitytype/entityid/Alice.jpeg"
+     * @return The object name with leading slash, e.g., "Alice.jpeg", or null if not found
      */
     public String getObjectName(String gcsPath) {
         // get the index of the last slash after "gs://"
