@@ -657,5 +657,18 @@ Test search service.
 Test file service in docker.
 Test user register, login, logout in keycloak.
 
+Daily Scrum Meeting - April 20, 2024
 
+Participant 3: Shixin
+Done:
+Complete the file service, fix the bug of create duplicated records for the same file.
+Complete feature: retrieve file data according to associatedEntityId and associatedEntityType feature in file service.
+Complete feature: convert google cloud storage gs:// url to public access URL.
+Test file service api through Postman.
+Deploy the file service into docker environment.
+Test file service api in docker.
+
+To:
+Test search service, fix bugs in search service.
+Deploy search service into docker and test.
 
