@@ -40,7 +40,7 @@ public class FileService {
         try (Tracer.SpanInScope ws = tracer.withSpan(storageSpan.start())) {
             log.info("Calling Google Storage for file upload");
 
-            StorageResponse storageResponse = storageService.uploadFile(fileRequest.getFile(), fileRequest.getFileType());
+            StorageResponse storageResponse = storageService.uploadFile(fileRequest.getFile(), fileRequest.getFileType(), fileRequest.getAssociatedEntityType(), fileRequest.getAssociatedEntityId());
 
             if (storageResponse == null) {
                 log.error("Failed to upload file to GCS");
@@ -48,7 +48,7 @@ public class FileService {
             }
             else {
                 //check if the file exists in the database
-                Optional<File> optionalFile = fileRepository.findByUrlContaining(storageResponse.getUrl());
+                Optional<File> optionalFile = fileRepository.findByUrl(storageResponse.getUrl());
                 if (optionalFile.isPresent()) {
                     log.info("file url = {} exists in the database", storageResponse.getUrl());
 
@@ -107,8 +107,8 @@ public class FileService {
         return fileRepository.findById(fileId).orElse(null);
     }
 
-    public File findByUrlContaining(String url) {
-        return fileRepository.findByUrlContaining(url).orElse(null);
+    public List<File> findByUrlContaining(String fileName) {
+        return fileRepository.findByUrlContaining(fileName);
     }
 
     public void deleteSingleFileById(Long fileId) throws IOException {

@@ -19,5 +19,8 @@ public interface FileRepository extends JpaRepository<File, Long> {
     List<File> findByAssociatedEntityIdAndAssociatedEntityType(String associatedEntityId, String associatedEntityType, Sort sort);
 
     // check if the url exists in the database
-    Optional<File> findByUrlContaining(String url);
+    List<File> findByUrlContaining(String fileName);
+
+    // check if the url exists in the database
+    Optional<File> findByUrl(String url);
 }

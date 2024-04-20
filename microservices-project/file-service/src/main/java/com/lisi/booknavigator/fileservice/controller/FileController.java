@@ -99,41 +99,24 @@ public class FileController {
         }
         else {
             log.info("File found, fileId = {} ", fileId);
-            FileResponse fileResponse = new FileResponse(
-                    file.getId(),
-                    googleCloudStorageService.generateSignedPublicUrl(file.getUrl()),
-                    file.getUrl(),
-                    storageService.getObjectName(file.getUrl()),
-                    file.getUploadDate(),
-                    file.getAssociatedEntityId(),
-                    file.getAssociatedEntityType(),
-                    file.getUserId());
-            return ResponseEntity.ok(fileResponse);
-
+            return ResponseEntity.ok(convertToFileResponse(file));
         }
     }
 
     @GetMapping("name/{fileName}")
-    public ResponseEntity<FileResponse> getFileByName(@PathVariable String fileName) {
-        File file = fileService.findByUrlContaining(fileName);
-        if (file == null) {
+    public ResponseEntity<List<FileResponse>> getFileByName(@PathVariable String fileName) {
+        List<File> files = fileService.findByUrlContaining(fileName);
+        if (files.isEmpty()) {
 
             log.info("File not found, fileName = {} ", fileName);
             return ResponseEntity.notFound().build();
-
         }
         else {
-            log.info("File found, fileName = {} ", fileName);
-            FileResponse fileResponse = new FileResponse(
-                    file.getId(),
-                    googleCloudStorageService.generateSignedPublicUrl(file.getUrl()),
-                    file.getUrl(),
-                    storageService.getObjectName(file.getUrl()),
-                    file.getUploadDate(),
-                    file.getAssociatedEntityId(),
-                    file.getAssociatedEntityType(),
-                    file.getUserId());
-            return ResponseEntity.ok(fileResponse);
+            log.info("Number of File found is {}, fileName = {} ",files.size(), fileName);
+            List<FileResponse> fileresponses = files.stream()
+                    .map(this::convertToFileResponse)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(fileresponses);
 
         }
     }

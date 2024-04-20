@@ -28,8 +28,15 @@ public class GoogleCloudStorageService {
     public URL generateSignedPublicUrl(String gcsUrl) {
         // 解析 gcsUrl，例如 "gs://bucket-name/object-name"
         String[] parts = gcsUrl.replace("gs://", "").split("/", 2);
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("Invalid GCS URL format.");
+        }
         String bucketName = parts[0];
         String objectName = parts[1];
+
+        // Optional: Remove any leading slashes from the object name to clean it up
+        objectName = objectName.replaceAll("^/*", "");
+
         log.info("gsurl= {} ", gcsUrl);
         log.info("bucketName= {} ", bucketName);
         log.info("objectName= {} ", objectName);
@@ -47,8 +54,15 @@ public class GoogleCloudStorageService {
         log.info("Trying to delete file from Google Cloud Storage at {}", filePath);
 
         // get bucket name and object name from the file path
-        String bucketName = filePath.substring(filePath.indexOf("//") + 2, filePath.indexOf("/", filePath.indexOf("//") + 2));
-        String objectName = filePath.substring(filePath.indexOf("/", filePath.indexOf("//") + 2) + 1);
+        String[] parts = filePath.replace("gs://", "").split("/", 2);
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("Invalid GCS URL format.");
+        }
+        String bucketName = parts[0];
+        String objectName = parts[1];
+
+        // Optional: Remove any leading slashes from the object name to clean it up
+        objectName = objectName.replaceAll("^/*", "");
 
         try {
             //log.info("Beginning deletion...");

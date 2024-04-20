@@ -77,15 +77,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-<<<<<<< HEAD
 microservices-project/docker-compose.yml
 
 !init/init.sql
 
 /init/atomic-optics-419416-abd72682717f.json
 
-microservices-project/init/atomic-optics-419416-abd72682717f.json
-
-=======
->>>>>>> d7caa3aa1674d2a3ba1f9ecf0f22c303314df309
 *.json
+
+microservices-project/postgres-dhrms/
