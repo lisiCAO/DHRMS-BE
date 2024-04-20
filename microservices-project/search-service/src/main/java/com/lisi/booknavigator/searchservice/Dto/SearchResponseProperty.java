@@ -11,5 +11,5 @@ import lombok.*;
 @Builder
 public class SearchResponseProperty {
     private String PropertyId;
-    private Property elasticProperty;
+    private Property property;
 }

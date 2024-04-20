@@ -15,6 +15,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class Property {
 
     @Id
+    @Field(type = FieldType.Text)
     private String id;
 
     @Field(type = FieldType.Keyword)
