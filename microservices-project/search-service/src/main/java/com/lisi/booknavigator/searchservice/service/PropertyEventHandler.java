@@ -19,7 +19,7 @@ public class PropertyEventHandler {
 
     @KafkaListener(topics = "propertiesTopic", groupId = "search-service-group")
     public void listenPropertyChanges(PropertyEvent event) {
-        if (event == null || event.getProperty() == null) {
+        if (event == null || event.getPropertyId() == null) {
             log.error("Received null event or null property");
             return; // Skip processing for this message
         }
