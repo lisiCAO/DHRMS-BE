@@ -657,6 +657,14 @@ Test search service.
 Test file service in docker.
 Test user register, login, logout in keycloak.
 
+Participant 4: Ashok
+Done:
+Worked in Payment-service and api
+To Do: 
+Impliment stripe api for the payment
+Challanges:
+Try to understand the Stripe api and implement it
+
 Daily Scrum Meeting - April 20, 2024
 
 Participant 3: Shixin
