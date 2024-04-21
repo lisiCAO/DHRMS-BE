@@ -692,3 +692,14 @@ To Do:
   Test search service, fix bugs in search service.
   Deploy search service into docker and test.
 
+Daily Scrum Meeting - April 20, 2024
+Participant 3: Shixin
+Done:
+  Test search service, and deploy search service into docker.
+  Update file service, add associatedEntityType and associateEntityId in the Google Cloud storage path
+    to allow duplicated filenames.
+
+To Do:
+  Update Property Service, add postcode validation.
+  Update create property and update property method ,to check if the data field is null. 
+
