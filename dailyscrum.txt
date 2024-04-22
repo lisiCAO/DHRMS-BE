@@ -713,3 +713,16 @@ To Do:
   Update Property Service, add postcode validation.
   Update create property and update property method ,to check if the data field is null. 
 
+Daily Scrum Meeting - April 21, 2024
+Participant 3: Shixin
+Done:
+  Update property service
+    Add validation of ownerUserId, address, postcode, propertyType
+    Allow other fields equal to null during create or update a property
+    Update log output
+    Add self-definitaion validation to check Canada postcode format
+
+To Do:
+  Deploy Property Service into docker and test.
+  Update lease service, add application form api.
+
