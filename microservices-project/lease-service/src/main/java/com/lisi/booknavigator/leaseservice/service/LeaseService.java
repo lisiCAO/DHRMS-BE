@@ -48,7 +48,7 @@ public class LeaseService {
     public List<LeaseResponse> getAllLease(){
         List<Lease> leases = leaseRepository.findAll();
 
-        log.info("Retrieved {} properties", leases.size());
+        log.info("Retrieved {} leases", leases.size());
 
         return leases.stream().map(this::mapToLeaseResponse).toList();
     }
@@ -74,7 +74,7 @@ public class LeaseService {
             log.info("lease {} retrieved", lease);
             return mapToLeaseResponse(lease);
         } else {
-            log.info("lease ID {} not found.", leaseId);
+            log.info("lease Id {} not found.", leaseId);
             return null;
         }
     }
@@ -105,7 +105,7 @@ public class LeaseService {
             log.info("lease {} updated", updatedLease);
             return mapToLeaseResponse(updatedLease);
         } else {
-            log.info("lease ID {} not found.", leaseId);
+            log.info("lease Id {} not found.", leaseId);
             return null;
         }
     }
@@ -117,10 +117,10 @@ public class LeaseService {
             LeaseEvent event = new LeaseEvent(leaseId, LeaseEvent.EventType.DELETE, null);
             kafkaTemplate.send("leasesTopic",event);
 
-            log.info("lease ID {} deleted", leaseId);
+            log.info("lease Id {} deleted", leaseId);
             return true; // delete operation executed successfully
         } else {
-            log.info("lease ID {} not found.", leaseId);
+            log.info("lease Id {} not found.", leaseId);
 
             return false; // lease not found
         }

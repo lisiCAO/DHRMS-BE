@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -15,8 +15,8 @@ public class LeaseResponse {
         private Long id;
         private String propertyId;
         private Long tenantUserId;
-        private Date startDate;
-        private Date endDate;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
         private Float monthlyRent;
         private Float deposit;
         private String leaseStatus;
