@@ -27,7 +27,7 @@ public class PropertyServiceApplication {
                 PropertyRequest propertyRequest1 = new PropertyRequest(
                         Long.valueOf("1"),
                         "123 Main Street, City, Country",
-                        "12345",
+                        "A1B 2C3",
                         PropertyType.APARTMENT,
                         "A beautiful apartment with sea view",
                         new Amenities(true, true, false, 2, 1, Float.valueOf("200.0")),
@@ -38,7 +38,7 @@ public class PropertyServiceApplication {
                 PropertyRequest propertyRequest2 = new PropertyRequest(
                         Long.valueOf("2"),
                         "456 Elm Street, City, Country",
-                        "67890",
+                        "C1A2Z3",
                         PropertyType.HOUSE,
                         "A cozy house with a big backyard",
                         new Amenities(false, true, true, 3, 2, Float.valueOf("200.0")),

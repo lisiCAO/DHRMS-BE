@@ -118,7 +118,7 @@ services:
   api-gateway:
     image: lisicao/api-gateway:latest
     container_name: api-gateway
-
+    #pull_policy: always
     ports:
       - "8181:8080"
     expose:
@@ -164,6 +164,7 @@ services:
 
   file-service:
     container_name: file-service
+    #pull_policy: always
     image: lisicao/file-service:latest
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -195,6 +196,7 @@ services:
 
   property-service:
     container_name: property-service
+    #pull_policy: always
     image: lisicao/property-service:latest
 
     environment:
@@ -209,6 +211,7 @@ services:
 
   search-service:
     container_name: search-service
+    #pull_policy: always
     image: lisicao/search-service:latest
 
     environment:
