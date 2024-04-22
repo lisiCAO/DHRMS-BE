@@ -688,6 +688,14 @@ Done:
   Deploy the file service into docker environment.
   Test file service api in docker.
 
+Participant 4: Ashok
+Done:
+Worked in Stripe and simple Payment-service
+To Do: 
+Implementation stripe api for the payment and create database.
+Challanges:
+Try to understand the Stripe api and implement it
+
 To Do:
   Test search service, fix bugs in search service.
   Deploy search service into docker and test.
