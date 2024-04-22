@@ -5,13 +5,13 @@ metadata:
     kompose.cmd: kompose convert -o k8s/
     kompose.version: 1.32.0 (HEAD)
   labels:
-    io.kompose.service: property-service
-  name: property-service
+    io.kompose.service: api-gateway
+  name: api-gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: property-service
+      io.kompose.service: api-gateway
   template:
     metadata:
       annotations:
@@ -19,36 +19,27 @@ spec:
         kompose.version: 1.32.0 (HEAD)
       labels:
         io.kompose.network/microservices-project-microservices-network: "true"
-        io.kompose.service: property-service
+        io.kompose.service: api-gateway
     spec:
+      serviceAccountName: default
       containers:
         - env:
+            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY
+              value: TRACE
             - name: SPRING_PROFILES_ACTIVE
-              value: docker
-            - name: SPRING_DATA_MONGODB_URI
-              value: mongodb://mongo:27017/property-service
-          image: lisicao/property-service:latest
+              value: k8s
+          image: lisicao/api-gateway:latest
           imagePullPolicy: Always
-          name: property-service
+          name: api-gateway
           resources:
             requests:
               cpu: "100m"
-              memory: "256Mi"
+              memory: "128Mi"
             limits:
               cpu: "200m"
-              memory: "512Mi"
+              memory: "256Mi"
+          ports:
+            - containerPort: 8080
+            - containerPort: 8181
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: property-service
-spec:
-  ports:
-    - name: "80"
-      port: 80
-      targetPort: 8080
-  selector:
-    io.kompose.service: property-service
-status:
-  loadBalancer: {}
+status: {}

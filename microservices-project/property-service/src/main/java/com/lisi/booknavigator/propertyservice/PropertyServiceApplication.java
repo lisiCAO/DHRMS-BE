@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.service.PropertyService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import com.lisi.booknavigator.propertyservice.model.Amenities;
 import com.lisi.booknavigator.propertyservice.model.PropertyType;
 
 @SpringBootApplication
 @Slf4j
+@EnableDiscoveryClient
 public class PropertyServiceApplication {
 
         public static void main(String[] args) {
