@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
+
 @Entity
 @Table(name = "leases")
 @AllArgsConstructor
@@ -32,10 +34,10 @@ public class Lease {
     private Long tenantUserId;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "monthly_rent")
     private Float monthlyRent;
