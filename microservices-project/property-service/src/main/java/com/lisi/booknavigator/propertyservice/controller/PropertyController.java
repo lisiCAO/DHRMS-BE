@@ -1,5 +1,6 @@
 package com.lisi.booknavigator.propertyservice.controller;
 
+import com.lisi.booknavigator.propertyservice.dto.OnlyAddressRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyResponse;
 import com.lisi.booknavigator.propertyservice.service.PropertyService;
@@ -39,6 +40,19 @@ public class PropertyController {
         } catch (Exception e) {
             log.error("Error creating property: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating property: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/only-address")
+    public ResponseEntity<Object> createAddressOnlyProperty(@RequestBody @Valid OnlyAddressRequest onlyAddressRequest) {
+        try {
+            PropertyResponse property = propertyService.createOnlyAddressProperty(onlyAddressRequest);
+            log.info("Property(only address) {} created successfully.", property.getId());
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(property);
+        } catch (Exception e) {
+            log.error("Error creating property(only address): {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating property (only address): " + e.getMessage());
         }
     }
 

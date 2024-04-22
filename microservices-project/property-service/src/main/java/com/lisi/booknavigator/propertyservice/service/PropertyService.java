@@ -1,5 +1,6 @@
 package com.lisi.booknavigator.propertyservice.service;
 
+import com.lisi.booknavigator.propertyservice.dto.OnlyAddressRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyRequest;
 import com.lisi.booknavigator.propertyservice.dto.PropertyResponse;
 import com.lisi.booknavigator.propertyservice.event.PropertyEvent;
@@ -55,6 +56,31 @@ public class PropertyService {
         log.info("Property {} is saved", property.getId());
 
         return mapToPropertyResponse(property);
+    }
+
+    public PropertyResponse createOnlyAddressProperty(OnlyAddressRequest onlyAddressRequest){
+
+        // create a default amenities object
+        Amenities defaultAmenities = new Amenities(false, false, false, 0, 0, 0.0f);
+
+        Property property = Property.builder()
+                .ownerUserId(0L)
+                .address(onlyAddressRequest.getAddress())
+                .postcode("A1A 1A1")
+                .propertytype(PropertyType.APARTMENT)
+                .propertydescription("Default Description")
+                .amenities(defaultAmenities)
+                .status("Not Available")
+                .build();
+
+        Property savedProperty = propertyRepository.save(property);
+
+        PropertyEvent event = new PropertyEvent(savedProperty.getId(), PropertyEvent.EventType.CREATE, savedProperty);
+        kafkaTemplate.send("propertiesTopic",event);
+
+        log.info("Address Only Property {} is saved", savedProperty.getId());
+
+        return mapToPropertyResponse(savedProperty);
     }
 
     public List<PropertyResponse> getAllProperties(){
