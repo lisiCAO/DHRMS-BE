@@ -786,3 +786,26 @@ To Do:
 Challenge: 
   no time to handle colleagues' bugs
 
+Participant 3: Shixin
+Done:
+  Update property service
+    Add one feature to create a new property only with address.
+
+
+To Do:
+  Deploy Property Service into docker and test.
+  Update lease service, add lease application CRUD api.
+
+Daily Scrum Meeting - April 22, 2024
+
+
+Participant 3: Shixin
+Done:
+  Update lease service
+    Add lease application model, and CRUD api.
+    update lease model add validation for each field.
+    Add feature to search lease record by LeaseStatus and search lease application record by LeaseApplicationStatus.
+    Test lease service and deploy lease service into docker.
+
+To Do:
+    Test service in k8s of google cloud.
