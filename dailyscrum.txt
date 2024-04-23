@@ -727,6 +727,14 @@ To Do:
   Update Property Service, add postcode validation.
   Update create property and update property method ,to check if the data field is null. 
 
+Participant 4: Ashok
+Done:
+Worked in Stripe Backend
+To Do: 
+Develop stripe test environment for testing
+Challanges:
+New to create new database and frontend
+
 Daily Scrum Meeting - April 21, 2024
 
 Participant 1: Lisi
@@ -753,6 +761,14 @@ Done:
 To Do:
   Deploy Property Service into docker and test.
   Update lease service, add application form api.
+
+Participant 4: Ashok
+Done:
+Worked in Stripe frontend
+To Do: 
+working stripe test environment for testing
+Challanges:
+Tutorials were misleading to show different approach to get token
 
 Daily Scrum Meeting - April 22, 2024
 
