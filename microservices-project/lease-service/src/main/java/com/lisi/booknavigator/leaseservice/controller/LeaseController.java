@@ -2,6 +2,7 @@ package com.lisi.booknavigator.leaseservice.controller;
 
 import com.lisi.booknavigator.leaseservice.dto.LeaseRequest;
 import com.lisi.booknavigator.leaseservice.dto.LeaseResponse;
+import com.lisi.booknavigator.leaseservice.dto.SearchCondition;
 import com.lisi.booknavigator.leaseservice.service.LeaseService;
 
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -21,12 +23,12 @@ public class LeaseController {
     private final LeaseService leaseService;
 
     @PostMapping
-    public ResponseEntity<Object> createLease(@RequestBody LeaseRequest leaseRequest) {
+    public ResponseEntity<Object> createLease(@RequestBody @Valid LeaseRequest leaseRequest) {
         try {
-            leaseService.createLease(leaseRequest);
+            LeaseResponse lease = leaseService.createLease(leaseRequest);
             log.info("Lease created successfully.");
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("Lease created successfully.");
+            return ResponseEntity.status(HttpStatus.CREATED).body(lease);
         } catch (Exception e) {
             log.error("Error creating Lease: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating Lease: " + e.getMessage());
@@ -50,6 +52,23 @@ public class LeaseController {
         }
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Object> getAllLeaseBySearchCondition(@RequestBody @Valid SearchCondition searchCondition) {
+        try {
+            List<LeaseResponse> leases = leaseService.getAllLeaseBySearchCondition(searchCondition.getSearchCondition());
+            if (leases.isEmpty()) {
+                log.info("No Lease found Search Condition = {}.", searchCondition.getSearchCondition());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Lease found, Search Condition =" + searchCondition.getSearchCondition());
+            } else {
+                log.info("Retrieved {} Leases", leases.size());
+                return ResponseEntity.ok(leases);
+            }
+        } catch (Exception e) {
+            log.error("Error retrieving Lease: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrievingLease: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/{leaseId}")
     public ResponseEntity<Object> getLeaseById(@PathVariable Long leaseId) {
         try {
@@ -68,12 +87,12 @@ public class LeaseController {
     }
 
     @PutMapping("/{leaseId}")
-    public ResponseEntity<Object> updateLeaseById(@PathVariable Long leaseId, @RequestBody LeaseRequest leaseRequest) {
+    public ResponseEntity<Object> updateLeaseById(@PathVariable Long leaseId, @RequestBody @Valid LeaseRequest leaseRequest) {
         try {
             LeaseResponse updatedLease = leaseService.updateLeaseById(leaseId, leaseRequest);
             if (updatedLease != null) {
                 log.info("Lease Id {} updated successfully.", leaseId);
-                return ResponseEntity.ok("Lease updated successfully.");
+                return ResponseEntity.ok(updatedLease);
             } else {
                 log.info("Lease ID {} not found.", leaseId);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lease not found.");

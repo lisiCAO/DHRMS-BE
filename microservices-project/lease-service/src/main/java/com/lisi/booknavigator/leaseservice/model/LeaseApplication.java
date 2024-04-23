@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
 
 import java.time.LocalDateTime;
 
@@ -53,6 +54,7 @@ public class LeaseApplication {
     private int numOfOccupants;
 
     @NotBlank(message = "ApplicationStatus must not be empty or null")
+    @Column(name = "application_status")
     private String applicationStatus;
 
 }
