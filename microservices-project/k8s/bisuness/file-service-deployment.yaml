@@ -5,13 +5,13 @@ metadata:
     kompose.cmd: kompose convert -o k8s/
     kompose.version: 1.32.0 (HEAD)
   labels:
-    io.kompose.service: search-service
-  name: search-service
+    io.kompose.service: file-service
+  name: file-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: search-service
+      io.kompose.service: file-service
   template:
     metadata:
       annotations:
@@ -19,37 +19,48 @@ spec:
         kompose.version: 1.32.0 (HEAD)
       labels:
         io.kompose.network/microservices-project-microservices-network: "true"
-        io.kompose.service: search-service
+        io.kompose.service: file-service
     spec:
       containers:
         - env:
-            - name: OPENAI_API_KEY
-              value: test
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
-          image: lisicao/search-service:latest
-          name: search-service
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-dhrms.default.svc.cluster.local:5432/file-service
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value:  "/etc/google/auth/key.json"
+          image: lisicao/file-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          name: file-service
           resources:
             requests:
               cpu: "100m"
               memory: "256Mi"
             limits:
-              cpu: "250m"
+              cpu: "200m"
               memory: "512Mi"
+          volumeMounts:
+            - name: gcp-key
+              mountPath: "/etc/google/auth"
+              readOnly: true
+      volumes:
+        - name: gcp-key
+          secret:
+            secretName: gcp-key
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: search-service
+  name: file-service
 spec:
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
   selector:
-    io.kompose.service: search-service
+    io.kompose.service: file-service
 status:
   loadBalancer: {}
