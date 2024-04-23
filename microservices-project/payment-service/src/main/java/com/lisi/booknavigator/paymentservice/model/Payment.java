@@ -4,21 +4,29 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Id;
 
 
-@Document(value = "payment")
+
+//@Document(value = "payment")
+import jakarta.persistence.Entity;
+        import jakarta.persistence.GeneratedValue;
+        import jakarta.persistence.GenerationType;
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 
+@Entity
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer paymentId;
-    private Integer leaseId;
-    private Integer paidByUserId;
+    private Long leaseId;
+    private Long landLordId;
+    private Long paidByUserId;
     private float amount;
     private String paymentDate;
     private PaymentType paymentMethod;

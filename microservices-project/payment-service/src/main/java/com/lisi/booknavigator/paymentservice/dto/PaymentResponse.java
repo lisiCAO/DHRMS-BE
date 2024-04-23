@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentResponse {
         private Integer paymentId;
-        private Integer leaseId;
-        private Integer paidByUserId;
+        private Long leaseId;
+        private Long landLordId;
+        private Long paidByUserId;
         private float amount;
         private String paymentDate;
         private PaymentType paymentMethod;
