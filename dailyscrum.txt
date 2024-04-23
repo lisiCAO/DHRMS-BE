@@ -796,7 +796,7 @@ To Do:
   Deploy Property Service into docker and test.
   Update lease service, add lease application CRUD api.
 
-Daily Scrum Meeting - April 22, 2024
+Daily Scrum Meeting - April 23, 2024
 
 
 Participant 3: Shixin
