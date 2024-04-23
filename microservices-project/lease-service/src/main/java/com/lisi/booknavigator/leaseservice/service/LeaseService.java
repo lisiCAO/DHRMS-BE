@@ -1,15 +1,13 @@
 package com.lisi.booknavigator.leaseservice.service;
 
+import com.lisi.booknavigator.leaseservice.dto.LeaseApplicationResponse;
 import com.lisi.booknavigator.leaseservice.dto.LeaseRequest;
 import com.lisi.booknavigator.leaseservice.dto.LeaseResponse;
 import com.lisi.booknavigator.leaseservice.event.LeaseEvent;
-
 import com.lisi.booknavigator.leaseservice.model.Lease;
 import com.lisi.booknavigator.leaseservice.repository.LeaseRepository;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,7 @@ public class LeaseService {
     private final LeaseRepository leaseRepository;
     private final KafkaTemplate<String, LeaseEvent> kafkaTemplate;
 
-    public void createLease(LeaseRequest leaseRequest){
+    public LeaseResponse createLease(LeaseRequest leaseRequest){
 
         Lease lease = Lease.builder()
                 .propertyId(leaseRequest.getPropertyId())
@@ -43,6 +41,8 @@ public class LeaseService {
         kafkaTemplate.send("leasesTopic",event);
 
         log.info("lease {} is saved", savedLease.getId());
+
+        return mapToLeaseResponse(savedLease);
     }
 
     public List<LeaseResponse> getAllLease(){
@@ -51,6 +51,25 @@ public class LeaseService {
         log.info("Retrieved {} leases", leases.size());
 
         return leases.stream().map(this::mapToLeaseResponse).toList();
+    }
+
+    public List<LeaseResponse> getAllLeaseBySearchCondition(String searchCondition){
+
+        // Normalize the input to handle case insensitivity
+        String normalizedSearchCondition = searchCondition.trim().toLowerCase();
+
+        // Check if the normalized search condition is one of the valid statuses
+        if (normalizedSearchCondition.equals("pending") || normalizedSearchCondition.equals("approved") || normalizedSearchCondition.equals("denied")) {
+            List<Lease> leases = leaseRepository.findByLeaseStatus(searchCondition);
+            log.info("Retrieved {} Lease(s)", leases.size());
+
+            return leases.stream()
+                    .map(this::mapToLeaseResponse)
+                    .toList();
+        } else {
+            log.warn("Invalid search condition: {}", searchCondition);
+            return List.of();  // Return an empty list if the condition is not valid
+        }
     }
 
     private LeaseResponse mapToLeaseResponse(Lease lease) {

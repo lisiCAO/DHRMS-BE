@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +51,25 @@ public class LeaseApplicationService {
         log.info("Retrieved {} LeaseApplication", leaseApplications.size());
 
         return leaseApplications.stream().map(this::mapToLeaseApplicationResponse).toList();
+    }
+
+    public List<LeaseApplicationResponse> getAllLeaseApplicationBySearchCondition(String searchCondition){
+
+        // Normalize the input to handle case insensitivity
+        String normalizedSearchCondition = searchCondition.trim().toLowerCase();
+
+        // Check if the normalized search condition is one of the valid statuses
+        if (normalizedSearchCondition.equals("pending") || normalizedSearchCondition.equals("approved") || normalizedSearchCondition.equals("denied")) {
+            List<LeaseApplication> leaseApplications = leaseApplicationRepository.findByApplicationStatus(searchCondition);
+            log.info("Retrieved {} LeaseApplication(s)", leaseApplications.size());
+
+            return leaseApplications.stream()
+                    .map(this::mapToLeaseApplicationResponse)
+                    .toList();
+        } else {
+            log.warn("Invalid search condition: {}", searchCondition);
+            return List.of();  // Return an empty list if the condition is not valid
+        }
     }
 
     private LeaseApplicationResponse mapToLeaseApplicationResponse(LeaseApplication leaseApplication) {

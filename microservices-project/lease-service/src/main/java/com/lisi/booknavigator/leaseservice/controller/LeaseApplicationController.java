@@ -3,11 +3,14 @@ package com.lisi.booknavigator.leaseservice.controller;
 import com.lisi.booknavigator.leaseservice.dto.LeaseApplicationRequest;
 import com.lisi.booknavigator.leaseservice.dto.LeaseApplicationResponse;
 import com.lisi.booknavigator.leaseservice.service.LeaseApplicationService;
+import com.lisi.booknavigator.leaseservice.dto.SearchCondition;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class LeaseApplicationController {
     private final LeaseApplicationService leaseApplicationService;
 
     @PostMapping
-    public ResponseEntity<Object> createLeaseApplication(@RequestBody LeaseApplicationRequest leaseApplicationRequest) {
+    public ResponseEntity<Object> createLeaseApplication(@RequestBody @Valid LeaseApplicationRequest leaseApplicationRequest) {
         try {
             LeaseApplicationResponse leaseApplication = leaseApplicationService.createLeaseApplication(leaseApplicationRequest);
             log.info("Lease application created successfully.");
@@ -45,7 +48,24 @@ public class LeaseApplicationController {
             }
         } catch (Exception e) {
             log.error("Error retrieving Lease Application: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving all Lease Application: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving Lease Application: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Object> getAllLeaseApplicationBySearchCondition(@RequestBody @Valid SearchCondition searchCondition) {
+        try {
+            List<LeaseApplicationResponse> leaseApplications = leaseApplicationService.getAllLeaseApplicationBySearchCondition(searchCondition.getSearchCondition());
+            if (leaseApplications.isEmpty()) {
+                log.info("No Lease Application found Search Condition = {}.", searchCondition.getSearchCondition());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Lease Application found, Search Condition =" + searchCondition.getSearchCondition());
+            } else {
+                log.info("Retrieved {} Lease applications", leaseApplications.size());
+                return ResponseEntity.ok(leaseApplications);
+            }
+        } catch (Exception e) {
+            log.error("Error retrieving Lease Application: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving Lease Application: " + e.getMessage());
         }
     }
 
@@ -67,7 +87,7 @@ public class LeaseApplicationController {
     }
 
     @PutMapping("/{leaseApplicationId}")
-    public ResponseEntity<Object> updateLeaseApplicationById(@PathVariable Long leaseApplicationId, @RequestBody LeaseApplicationRequest leaseApplicationRequest) {
+    public ResponseEntity<Object> updateLeaseApplicationById(@PathVariable Long leaseApplicationId, @RequestBody @Valid LeaseApplicationRequest leaseApplicationRequest) {
         try {
             LeaseApplicationResponse updatedLeaseApplication = leaseApplicationService.updateLeaseApplicationById(leaseApplicationId, leaseApplicationRequest);
             if (updatedLeaseApplication != null) {
@@ -78,7 +98,7 @@ public class LeaseApplicationController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lease Application not found.");
             }
         } catch (Exception e) {
-            log.error("Error retrieving Lease: {}", e.getMessage());
+            log.error("Error retrieving Lease Application: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating Lease Application: " + e.getMessage());
         }
     }
