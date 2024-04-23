@@ -5,6 +5,7 @@ metadata:
 data:
   init.sql: |
     -- Your SQL commands go here
-    CREATE DATABASE "order-service";
-    CREATE DATABASE "inventory-service";
+    CREATE DATABASE "file-service";
+    CREATE DATABASE "payment-service";
+    CREATE DATABASE "lease-service"
     -- Others
