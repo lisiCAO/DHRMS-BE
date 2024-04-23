@@ -703,6 +703,20 @@ Try to understand the Stripe api and implement it
 
 
 Daily Scrum Meeting - April 20, 2024
+
+Participant 1: Lisi
+
+Done:
+  reassgin tasks
+  look into keycloak system and other user management solution
+
+To Do:
+  deploy backend totally on google cloud kubernetes
+
+Challenge: 
+  security is too complicated to handle with limit resouces
+  no simple solutions for authentication part in micro-services
+
 Participant 3: Shixin
 Done:
   Test search service, and deploy search service into docker.
@@ -714,6 +728,20 @@ To Do:
   Update create property and update property method ,to check if the data field is null. 
 
 Daily Scrum Meeting - April 21, 2024
+
+Participant 1: Lisi
+
+Done:
+  figure out eureka conflicts with k8s
+  postgres, mongodb, elasticsearch could be access on GKS
+  check with Ashok on his work - payment-service
+
+To Do:
+  api-gateway transfer routes to business project and keycloak
+
+Challenge: 
+  no clear guide for solve such specific parts
+
 Participant 3: Shixin
 Done:
   Update property service
@@ -725,4 +753,20 @@ Done:
 To Do:
   Deploy Property Service into docker and test.
   Update lease service, add application form api.
+
+Daily Scrum Meeting - April 22, 2024
+
+Participant 1: Lisi
+
+Done:
+  business-services work properly on GKS without authentication
+
+To Do:
+  Enable "https" for keycloak pods
+    - apply for DNS
+    - generates Certificate
+  user management frontend and backend
+
+Challenge: 
+  no time to handle colleagues' bugs
 
