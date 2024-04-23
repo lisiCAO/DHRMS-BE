@@ -80,3 +80,11 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+microservices-project/mongo-data/
+
+microservices-project/init/atomic-optics-419416-abd72682717f.json
+
+microservices-project/mysql_keycloak_data/
+
+microservices-project/postgres-dhrms/
