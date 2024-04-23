@@ -1,7 +1,16 @@
 package com.lisi.booknavigator.paymentservice.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.stripe.model.Charge;
+import jakarta.servlet.http.HttpServletRequest;
 import com.lisi.booknavigator.paymentservice.dto.PaymentRequest;
 import com.lisi.booknavigator.paymentservice.dto.PaymentResponse;
+import com.lisi.booknavigator.paymentservice.dto.TokenChargeRequest;
+import com.lisi.booknavigator.paymentservice.model.Payment;
+import com.lisi.booknavigator.paymentservice.model.PaymentStatus;
+import com.lisi.booknavigator.paymentservice.repository.PaymentRepository;
 import com.lisi.booknavigator.paymentservice.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,27 +19,45 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/payments")
+@RequestMapping("/api/payments/")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
     @PostMapping
-    public ResponseEntity<Object> createPayment(@RequestBody PaymentRequest paymentRequest) {
-        try {
-            paymentService.createPayment(paymentRequest);
-            log.info("payment created successfully.");
+    public ResponseEntity<Object> chargeCard(@RequestBody Map<String, Object> payload ) {
 
-            return ResponseEntity.status(HttpStatus.CREATED).body("payment created successfully.");
+            String token = (String) payload.get("token");
+            Double amountValue = Double.parseDouble(payload.get("amount").toString());
+                // Charge the card
+            //String token = request.getHeader("token");
+            System.out.println(token);
+            //Double amountValue = Double.parseDouble(amount);
+            System.out.println(amountValue);
+            try {   PaymentRequest paymentRequest = new PaymentRequest();
+             paymentService.chargeCreditCard(token, amountValue, paymentRequest  );
+
+            // If the card is successfully charged, create the payment
+
+                //paymentService.createPayment(paymentRequest);
+                log.info("Payment created successfully.");
+                return ResponseEntity.status(HttpStatus.CREATED).body("Payment created successfully.");
+
         } catch (Exception e) {
-            log.error("Error creating payment: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating payment: " + e.getMessage());
+            log.error("Error charging card and creating payment: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error charging card and creating payment: " + e.getMessage());
         }
     }
+
+
+
+
 
     @GetMapping
     public ResponseEntity<Object> getAllPayments() {
@@ -83,21 +110,5 @@ public class PaymentController {
         }
     }
 
-    @DeleteMapping("/{paymentId}")
-    public ResponseEntity<Object> deletePayment(@PathVariable Integer paymentId) {
-        try{
-            boolean isDeleted = paymentService.deletePaymentById(paymentId);
-            if (isDeleted) {
-                log.info("Payment Id {} deleted successfully.", paymentId);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-            } else {
-                log.info("Payment ID {} not found.", paymentId);
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payment not found.");
-            }
-        } catch (Exception e) {
-            log.error("Error retrieving Payment: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting Payment: " + e.getMessage());
 
-        }
-    }
 }
