@@ -552,6 +552,14 @@ To Do:
   rewrite Jira
   rewrite frontend - start with home page
 
+Participant 2: Zhi
+
+Done:
+Presentation
+To Do:
+rewrite the entire front-end
+rewrite the layout
+
 Participant 3: Shixin
 Done:
 Pull and run a front-end project on my laptop. 
@@ -580,6 +588,13 @@ To Do:
   frontend - google maps components
   frontend - connections configuration: api services
 
+Participant 2: Zhi
+
+Done:
+the layout of pages
+To Do:
+CRUD of properties pages
+
 Participant 3: Shixin
 Done:
 Discussion about the backend requirement and development plan with Lisi. 
@@ -607,6 +622,15 @@ Done:
 To Do:
   frontend - finish google maps components 
   frontend - start property details page
+
+Participant 2: Zhi
+
+Done:
+the layout of pages
+property create form
+To Do:
+CRUD of properties pages
+home page
 
 Participant 3: Shixin
 Done:
@@ -645,6 +669,16 @@ To Do:
 Challenge: 
   pressure to keep on details due to limit time
 
+Participant 2: Zhi
+
+Done:
+the layout of pages
+property create form
+home page
+To Do:
+login and register page
+
+
 Participant 3: Shixin
 Done:
 Fix bug in upload file feature in file service to avoid creating duplicated records.
@@ -678,6 +712,15 @@ To Do:
 
 Challenge: 
   pressure to keep on details due to limit time
+
+Participant 2: Zhi
+
+Done:
+the layout of pages
+property create form
+home page
+To Do:
+login and register page
 
 Participant 3: Shixin
 Done:
@@ -717,6 +760,15 @@ Challenge:
   security is too complicated to handle with limit resouces
   no simple solutions for authentication part in micro-services
 
+Participant 2: Zhi
+
+Done:
+property create form
+login and register page
+To Do:
+property step form
+working on lease part
+
 Participant 3: Shixin
 Done:
   Test search service, and deploy search service into docker.
@@ -749,6 +801,16 @@ To Do:
 
 Challenge: 
   no clear guide for solve such specific parts
+
+Participant 2: Zhi
+
+Done:
+property create form
+login and register page
+property step form
+To Do:
+create application
+application list
 
 Participant 3: Shixin
 Done:
@@ -786,6 +848,17 @@ To Do:
 Challenge: 
   no time to handle colleagues' bugs
 
+Participant 2: Zhi
+
+Done:
+property create form
+login and register page
+property step form
+create application
+To Do:
+application list
+create lease
+
 Participant 3: Shixin
 Done:
   Update property service
@@ -806,6 +879,17 @@ make it work with project in postgre and include it in main project
 
 Daily Scrum Meeting - April 23, 2024
 
+Participant 2: Zhi
+
+Done:
+property create form
+login and register page
+property step form
+create application
+application list
+To Do:
+create lease
+lease list
 
 Participant 3: Shixin
 Done:
@@ -819,6 +903,21 @@ To Do:
     Test service in k8s of google cloud.
 
 Daily Scrum Meeting - April 24, 2024
+
+Participant 2: Zhi
+
+Done:
+property create form
+login and register page
+property step form
+create application
+application list
+create lease
+lease list
+To Do:
+fixed bugs and all issues
+
+
 
 
 Participant 3: Shixin
