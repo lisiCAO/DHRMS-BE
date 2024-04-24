@@ -43,7 +43,8 @@ spec:
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: admin
           ports:
-            - containerPort: 8080
+            - name: "http"
+              containerPort: 8080
           volumeMounts:
             - mountPath: /opt/keycloak/data/import/
               name: realm-files
