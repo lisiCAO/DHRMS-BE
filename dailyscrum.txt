@@ -796,6 +796,14 @@ To Do:
   Deploy Property Service into docker and test.
   Update lease service, add lease application CRUD api.
 
+Participant 4: Ashok
+Done:
+Adjusted backend code as necessary and tested with token
+To Do: 
+make it work with project in postgre and include it in main project
+
+
+
 Daily Scrum Meeting - April 23, 2024
 
 
