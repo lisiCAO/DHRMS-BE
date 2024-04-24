@@ -817,3 +817,14 @@ Done:
 
 To Do:
     Test service in k8s of google cloud.
+
+Daily Scrum Meeting - April 24, 2024
+
+
+Participant 3: Shixin
+Done:
+  Test property-service, file-service, search-service, lease-service in google cloud k8s. Test access the services through public ip address
+  with postman.
+
+To Do:
+  
