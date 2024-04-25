@@ -925,13 +925,12 @@ lease list
 To Do:
 fixed bugs and all issues
 
-
-
-
 Participant 3: Shixin
 Done:
   Test property-service, file-service, search-service, lease-service in google cloud k8s. Test access the services through public ip address
   with postman.
+To Do:
+  Update the lease service, add a feature: validate the property id exists in the property database or not before create a new lease or lease application.
 
 Participant 4: Ashok
 Done:
@@ -940,4 +939,13 @@ Gathered images for test for property
 To Do: 
 -In case payment is added to micro service adjust the code accordingly
 
+Daily Scrum Meeting - April 25, 2024
+
+Participant 3: Shixin
+Done:
+  Update the lease service, add a feature: validate the property id exists in the property database or not before create a new lease or lease application.
+
+To Do:
+  Test new feature of lease service in k8s.
+  Add mock date into the database.
   
