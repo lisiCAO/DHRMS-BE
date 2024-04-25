@@ -1,48 +1,80 @@
 package com.lisi.booknavigator.leaseservice.service;
 
-import com.lisi.booknavigator.leaseservice.dto.LeaseApplicationResponse;
+import com.lisi.booknavigator.leaseservice.dto.PropertyResponse;
 import com.lisi.booknavigator.leaseservice.dto.LeaseRequest;
 import com.lisi.booknavigator.leaseservice.dto.LeaseResponse;
-import com.lisi.booknavigator.leaseservice.event.LeaseEvent;
+//import com.lisi.booknavigator.leaseservice.event.LeaseEvent;
 import com.lisi.booknavigator.leaseservice.model.Lease;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.lisi.booknavigator.leaseservice.repository.LeaseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class LeaseService {
 
     private final LeaseRepository leaseRepository;
-    private final KafkaTemplate<String, LeaseEvent> kafkaTemplate;
+    //private final KafkaTemplate<String, LeaseEvent> kafkaTemplate;
+    private final RestTemplate restTemplate;
+
+    private final String propertyServiceUrl;
+
+    // 使用构造函数注入URL
+    public LeaseService(LeaseRepository leaseRepository,
+                        RestTemplate restTemplate,
+                        @Value("${property.service.url}") String propertyServiceUrl) {
+        this.leaseRepository = leaseRepository;
+        this.restTemplate = restTemplate;
+        this.propertyServiceUrl = propertyServiceUrl;
+    }
 
     public LeaseResponse createLease(LeaseRequest leaseRequest){
 
-        Lease lease = Lease.builder()
-                .propertyId(leaseRequest.getPropertyId())
-                .tenantUserId(leaseRequest.getTenantUserId())
-                .startDate(leaseRequest.getStartDate())
-                .endDate(leaseRequest.getEndDate())
-                .monthlyRent(leaseRequest.getMonthlyRent())
-                .deposit(leaseRequest.getDeposit())
-                .leaseStatus(leaseRequest.getLeaseStatus())
-                .terms(leaseRequest.getTerms())
-                .build();
 
-        Lease savedLease = leaseRepository.save(lease);
+        // Call the property service to fetch the property details
+        ResponseEntity<PropertyResponse> response = restTemplate.getForEntity(propertyServiceUrl, PropertyResponse.class, leaseRequest.getPropertyId());
 
-        LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
-        kafkaTemplate.send("leasesTopic",event);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            //PropertyResponse property = response.getBody();
+            // Assume property must be not null to continue
+            log.info("Property id: {} retrieved successfully", leaseRequest.getPropertyId());
 
-        log.info("lease {} is saved", savedLease.getId());
+            Lease lease = Lease.builder()
+                    .propertyId(leaseRequest.getPropertyId())
+                    .tenantUserId(leaseRequest.getTenantUserId())
+                    .startDate(leaseRequest.getStartDate())
+                    .endDate(leaseRequest.getEndDate())
+                    .monthlyRent(leaseRequest.getMonthlyRent())
+                    .deposit(leaseRequest.getDeposit())
+                    .leaseStatus(leaseRequest.getLeaseStatus())
+                    .terms(leaseRequest.getTerms())
+                    .build();
 
-        return mapToLeaseResponse(savedLease);
+            Lease savedLease = leaseRepository.save(lease);
+
+            //LeaseEvent event = new LeaseEvent(savedLease.getId(), LeaseEvent.EventType.CREATE, savedLease);
+            //kafkaTemplate.send("leasesTopic",event);
+
+            log.info("lease {} is saved", savedLease.getId());
+
+            return mapToLeaseResponse(savedLease);
+
+        } else if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+            log.error("Property id {} not found", leaseRequest.getPropertyId());
+            throw new RuntimeException("Property id " + leaseRequest.getPropertyId() +" not found");
+        } else {
+            log.error("Error call Property Service API");
+            throw new RuntimeException("Error call Property Service API");
+        }
     }
 
     public List<LeaseResponse> getAllLease(){
@@ -117,8 +149,8 @@ public class LeaseService {
             // save the updated lease
             Lease updatedLease = leaseRepository.save(lease);
 
-            LeaseEvent event = new LeaseEvent(updatedLease.getId(), LeaseEvent.EventType.UPDATE, updatedLease);
-            kafkaTemplate.send("leasesTopic",event);
+            //LeaseEvent event = new LeaseEvent(updatedLease.getId(), LeaseEvent.EventType.UPDATE, updatedLease);
+            //kafkaTemplate.send("leasesTopic",event);
 
             // convert the updated lease to response object
             log.info("lease {} updated", updatedLease);
@@ -133,8 +165,8 @@ public class LeaseService {
         if (leaseRepository.existsById(leaseId)) {
             leaseRepository.deleteById(leaseId);
 
-            LeaseEvent event = new LeaseEvent(leaseId, LeaseEvent.EventType.DELETE, null);
-            kafkaTemplate.send("leasesTopic",event);
+            //LeaseEvent event = new LeaseEvent(leaseId, LeaseEvent.EventType.DELETE, null);
+            //kafkaTemplate.send("leasesTopic",event);
 
             log.info("lease Id {} deleted", leaseId);
             return true; // delete operation executed successfully
