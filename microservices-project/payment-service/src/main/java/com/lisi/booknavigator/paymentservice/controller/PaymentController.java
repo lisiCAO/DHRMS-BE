@@ -3,14 +3,8 @@ package com.lisi.booknavigator.paymentservice.controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.stripe.model.Charge;
-import jakarta.servlet.http.HttpServletRequest;
 import com.lisi.booknavigator.paymentservice.dto.PaymentRequest;
 import com.lisi.booknavigator.paymentservice.dto.PaymentResponse;
-import com.lisi.booknavigator.paymentservice.dto.TokenChargeRequest;
-import com.lisi.booknavigator.paymentservice.model.Payment;
-import com.lisi.booknavigator.paymentservice.model.PaymentStatus;
-import com.lisi.booknavigator.paymentservice.repository.PaymentRepository;
 import com.lisi.booknavigator.paymentservice.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -84,7 +78,7 @@ public class PaymentController {
     }
 
     @GetMapping("/{paymentId}")
-    public ResponseEntity<Object> getPaymentById(@PathVariable Integer paymentId) {
+    public ResponseEntity<Object> getPaymentById(@PathVariable Long paymentId) {
         try {
             PaymentResponse payment = paymentService.getPaymentById(paymentId);
             if (payment != null) {
@@ -101,7 +95,7 @@ public class PaymentController {
     }
 
     @PutMapping("/{paymentId}")
-    public ResponseEntity<Object> updatePaymentById(@PathVariable Integer paymentId, @RequestBody PaymentRequest paymentRequest) {
+    public ResponseEntity<Object> updatePaymentById(@PathVariable Long paymentId, @RequestBody PaymentRequest paymentRequest) {
         try {
             PaymentResponse updatedPayment = paymentService.updatePaymentById(paymentId, paymentRequest);
             if (updatedPayment != null) {

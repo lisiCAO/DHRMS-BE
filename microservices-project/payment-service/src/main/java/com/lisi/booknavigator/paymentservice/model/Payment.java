@@ -1,14 +1,10 @@
 package com.lisi.booknavigator.paymentservice.model;
 
+import jakarta.persistence.*;
 import lombok.*;
-import jakarta.persistence.Id;
-
 
 
 //@Document(value = "payment")
-import jakarta.persistence.Entity;
-        import jakarta.persistence.GeneratedValue;
-        import jakarta.persistence.GenerationType;
 
 
 @AllArgsConstructor
@@ -17,12 +13,17 @@ import jakarta.persistence.Entity;
 @Data
 
 @Entity
+@Table(name = "payments")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer paymentId;
+    @NonNull
+    private Long paymentId;
+    @NonNull
     private Long leaseId;
+    @NonNull
     private Long landLordId;
+    @NonNull
     private Long paidByUserId;
     @NonNull
     private float amount;

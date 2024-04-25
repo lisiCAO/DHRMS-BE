@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentResponse {
-        private Integer paymentId;
+        private Long paymentId;
         private Long leaseId;
         private Long landLordId;
         private Long paidByUserId;

@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 public class PaymentEvent {
-    private Integer  paymentId;
+    private Long  paymentId;
     private EventType eventType;
     private Payment payment;
 

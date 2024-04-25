@@ -1,18 +1,15 @@
 package com.lisi.booknavigator.paymentservice.service;
 
 import com.stripe.model.Charge;
-import com.stripe.model.Token;
 import jakarta.annotation.PostConstruct;
 import com.lisi.booknavigator.paymentservice.dto.PaymentRequest;
 import com.lisi.booknavigator.paymentservice.dto.PaymentResponse;
-import com.lisi.booknavigator.paymentservice.dto.TokenChargeRequest;
 import com.lisi.booknavigator.paymentservice.event.PaymentEvent;
 import com.lisi.booknavigator.paymentservice.model.Payment;
 import com.lisi.booknavigator.paymentservice.model.PaymentStatus;
 import com.lisi.booknavigator.paymentservice.model.PaymentType;
 import com.lisi.booknavigator.paymentservice.repository.PaymentRepository;
 import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -101,12 +98,6 @@ public class PaymentService {
 
     }
 
-
-
-
-
-
-
     public List<PaymentResponse> getAllPayments(){
         List<Payment> payments = paymentRepository.findAll();
 
@@ -128,7 +119,7 @@ public class PaymentService {
                 .build();
     }
 
-    public PaymentResponse getPaymentById(Integer paymentId) {
+    public PaymentResponse getPaymentById(Long paymentId) {
         Optional<Payment> paymentOpt = paymentRepository.findById(paymentId);
         if (paymentOpt.isPresent()) {
             Payment payment = paymentOpt.get();
@@ -140,7 +131,7 @@ public class PaymentService {
         }
     }
 
-    public PaymentResponse updatePaymentById(Integer paymentId, PaymentRequest paymentRequest) {
+    public PaymentResponse updatePaymentById(Long paymentId, PaymentRequest paymentRequest) {
         Optional<Payment> paymentOpt = paymentRepository.findById(paymentId);
         if (paymentOpt.isPresent()) {
             Payment payment = paymentOpt.get();
