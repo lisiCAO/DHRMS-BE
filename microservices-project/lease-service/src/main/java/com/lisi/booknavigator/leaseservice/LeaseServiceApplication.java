@@ -2,8 +2,6 @@ package com.lisi.booknavigator.leaseservice;
 
 import com.lisi.booknavigator.leaseservice.dto.LeaseApplicationRequest;
 import com.lisi.booknavigator.leaseservice.service.LeaseApplicationService;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
