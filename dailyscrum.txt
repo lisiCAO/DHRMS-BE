@@ -902,6 +902,14 @@ Done:
 To Do:
     Test service in k8s of google cloud.
 
+Participant 4: Ashok
+Done:
+Make it work for standalone frontend
+To Do: 
+ -test environment for recording leaseId and lanlord id and 
+-record for failed message
+-test with postman api.
+
 Daily Scrum Meeting - April 24, 2024
 
 Participant 2: Zhi
@@ -925,5 +933,11 @@ Done:
   Test property-service, file-service, search-service, lease-service in google cloud k8s. Test access the services through public ip address
   with postman.
 
-To Do:
+Participant 4: Ashok
+Done:
+Genereated data for properties, lease, leaseapplication,.
+Gathered images for test for property
+To Do: 
+-In case payment is added to micro service adjust the code accordingly
+
   
