@@ -41,67 +41,7 @@ public class PaymentService {
         Stripe.apiKey = stripeSecretKey;
     }
 
-    public void chargeCreditCard(String token, double amount, PaymentRequest paymentRequest)  {
-        LocalDateTime now = LocalDateTime.now();
-
-        // Define the date time formatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        // Format the LocalDateTime object using the formatter
-        String formattedDateTime = now.format(formatter);
-         try {
-                Map<String, Object> chargeParams = new HashMap<String, Object>();
-                chargeParams.put("amount", (int)(amount * 100L));
-                chargeParams.put("currency", "USD");
-                chargeParams.put("source", token);
-                Charge charge = Charge.create(chargeParams);
-                float amountValue = (float) amount;
-                if (charge.getPaid()) {
-                    Payment payment = Payment.builder()
-
-                            .leaseId(234L)
-                            .landLordId(266L)
-                            .paidByUserId(444L)
-                            .amount(amountValue)
-                            .paymentDate(formattedDateTime) // Set current date and time as payment date
-                            .paymentMethod(PaymentType.CreditCard)
-                            .status(PaymentStatus.Completed) // Assuming payment is successful for now
-                            .build();
-
-                    Payment savedPayment = paymentRepository.save(payment);
-                    log.info("Payment {} is saved", savedPayment.getPaymentId());
-
-                } else {
-                    Payment payment = Payment.builder()
-
-                            .leaseId(paymentRequest.getLeaseId())
-                            .landLordId(paymentRequest.getLandLordId())
-                            .paidByUserId(paymentRequest.getPaidByUserId())
-                            .amount(amountValue)
-                            .paymentDate(formattedDateTime) // Set current date and time as payment date
-                            .paymentMethod(PaymentType.CreditCard)
-                            .status(PaymentStatus.Failed) // Assuming payment is successful for now
-                            .build();
-
-                    Payment savedPayment = paymentRepository.save(payment);
-                    log.info("Payment {} is saved", savedPayment.getPaymentId());
-
-                }
-
-            } catch(Exception e) {
-                // Handle Stripe exception
-                log.error("Error creating Payment: " + e.getMessage());
-                // Return appropriate response or throw exception
-            }
-
-    }
-
-
-
-
-
-    public void createPayment(PaymentRequest paymentRequest){
-
+    public void chargeCreditCard(String token, double amount,Long leaseId,Long landLordId, Long paidByUserId, PaymentRequest paymentRequest)  {
         LocalDateTime now = LocalDateTime.now();
 
         // Define the date time formatter
@@ -110,34 +50,60 @@ public class PaymentService {
         // Format the LocalDateTime object using the formatter
         String formattedDateTime = now.format(formatter);
         try {
+            Map<String, Object> chargeParams = new HashMap<String, Object>();
 
-                // Save payment details to the database
+            chargeParams.put("amount", (int)(amount * 100L));
+            chargeParams.put("currency", "USD");
+            float amountValue = (float) amount;
+
+            if (token.contains("error")) {
+                // Handle the error in the failed section
                 Payment payment = Payment.builder()
-
-                        .leaseId(paymentRequest.getLeaseId())
-                        .landLordId(paymentRequest.getLandLordId())
-                        .paidByUserId(paymentRequest.getPaidByUserId())
-                        .amount(paymentRequest.getAmount())
-                        .paymentDate(formattedDateTime) // Set current date and time as payment date
+                        .leaseId(leaseId)
+                        .landLordId(landLordId)
+                        .paidByUserId(paidByUserId)
+                        .amount(amountValue)
+                        .paymentDate(formattedDateTime)
                         .paymentMethod(PaymentType.CreditCard)
-                        .status(PaymentStatus.Completed) // Assuming payment is successful for now
+                        .status(PaymentStatus.Failed)
                         .build();
 
                 Payment savedPayment = paymentRepository.save(payment);
+                log.info("Payment {} failed: {}", savedPayment.getPaymentId(), token);
+            } else {
+                // Proceed with charging the card
 
-                // Publish payment event to Kafka
-                //PaymentEvent event = new PaymentEvent(savedPayment.getPaymentId(), PaymentEvent.EventType.CREATE, savedPayment);
 
-                log.info("Payment {} is saved", payment.getPaymentId());
+                chargeParams.put("source", token);
+                Charge charge = Charge.create(chargeParams);
 
-        } catch (Exception e) {
+
+
+                Payment payment = Payment.builder()
+                        .leaseId(leaseId)
+                        .landLordId(landLordId)
+                        .paidByUserId(paidByUserId)
+                        .amount(amountValue)
+                        .paymentDate(formattedDateTime)
+                        .paymentMethod(PaymentType.CreditCard)
+                        .status(charge.getPaid() ? PaymentStatus.Completed : PaymentStatus.Failed)
+                        .build();
+
+                Payment savedPayment = paymentRepository.save(payment);
+                log.info("Payment {} is saved", savedPayment.getPaymentId());
+            }
+
+        } catch(Exception e) {
             // Handle Stripe exception
             log.error("Error creating Payment: " + e.getMessage());
             // Return appropriate response or throw exception
         }
 
-
     }
+
+
+
+
 
 
 
@@ -153,6 +119,7 @@ public class PaymentService {
         return PaymentResponse.builder()
                 .paymentId(payment.getPaymentId())
                 .leaseId(payment.getLeaseId())
+                .landLordId(payment.getLandLordId())
                 .paidByUserId(payment.getPaidByUserId())
                 .amount(payment.getAmount())
                 .paymentDate(payment.getPaymentDate())

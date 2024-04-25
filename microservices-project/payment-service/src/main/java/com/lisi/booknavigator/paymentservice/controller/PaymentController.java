@@ -33,21 +33,28 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<Object> chargeCard(@RequestBody Map<String, Object> payload ) {
 
+        try {
             String token = (String) payload.get("token");
             Double amountValue = Double.parseDouble(payload.get("amount").toString());
-                // Charge the card
+            Integer integerLeaseId = (Integer) payload.get("leaseId");
+            Long leaseId = (long) integerLeaseId;
+            Integer integerLandLordId = (Integer) payload.get("landLordId");
+            Long landLordId = (long) integerLandLordId;
+
+            Integer integerPaidByUserId = (Integer) payload.get("paidByUserId");
+            Long paidByUserId = (long) integerPaidByUserId;
+
+            // Charge the card
             //String token = request.getHeader("token");
             System.out.println(token);
             //Double amountValue = Double.parseDouble(amount);
             System.out.println(amountValue);
-            try {   PaymentRequest paymentRequest = new PaymentRequest();
-             paymentService.chargeCreditCard(token, amountValue, paymentRequest  );
+            PaymentRequest paymentRequest = new PaymentRequest();
+            paymentService.chargeCreditCard(token, amountValue, leaseId, landLordId, paidByUserId, paymentRequest  );
 
             // If the card is successfully charged, create the payment
-
-                //paymentService.createPayment(paymentRequest);
-                log.info("Payment created successfully.");
-                return ResponseEntity.status(HttpStatus.CREATED).body("Payment created successfully.");
+            log.info("Payment Record created successfully.");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Payment Record created successfully.");
 
         } catch (Exception e) {
             log.error("Error charging card and creating payment: " + e.getMessage());

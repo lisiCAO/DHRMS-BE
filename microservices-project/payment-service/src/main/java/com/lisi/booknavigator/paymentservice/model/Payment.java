@@ -1,9 +1,6 @@
 package com.lisi.booknavigator.paymentservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import jakarta.persistence.Id;
 
 
@@ -27,6 +24,7 @@ public class Payment {
     private Long leaseId;
     private Long landLordId;
     private Long paidByUserId;
+    @NonNull
     private float amount;
     private String paymentDate;
     private PaymentType paymentMethod;
