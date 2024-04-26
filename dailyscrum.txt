@@ -950,3 +950,6 @@ To Do:
   Test new feature of lease service in k8s.
   Add mock date into the database.
   
+Daily Scrum Meeting - April 26, 2024
+Done :
+  social death with disaster project presentation
