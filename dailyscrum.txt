@@ -944,6 +944,7 @@ Daily Scrum Meeting - April 25, 2024
 Participant 3: Shixin
 Done:
   Update the lease service, add a feature: validate the property id exists in the property database or not before create a new lease or lease application.
+  Update the payment service, change the database from H2 to PostgreSQL, and test in Postman.
 
 To Do:
   Test new feature of lease service in k8s.
